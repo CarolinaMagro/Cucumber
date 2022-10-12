@@ -26,7 +26,7 @@ public class BDDStyleMethod {
         .when()
                 .get("http://localhost:3000/posts/")
         .then()
-                .body("author", containsInAnyOrder("Karthik KK", "Karthik KK",null));
+                .body("author", containsInAnyOrder("Karthik KK", "Karthik KK",null,"ExecuteAutomation"));
     }
 
 
@@ -64,9 +64,9 @@ public class BDDStyleMethod {
 
         given()
                 .contentType(ContentType.JSON)
-                .queryParam("id",1).
+                .queryParam("id","1").
         when()
-                .get("http://localhost:3000/posts/").
+                .get("http://localhost:3000/post/").
         then()
                 .body("author", containsString("Karthik KK"));
     }
