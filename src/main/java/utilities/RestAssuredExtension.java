@@ -74,5 +74,4 @@ public class RestAssuredExtension{
         return null;
     }
 
-
 }
