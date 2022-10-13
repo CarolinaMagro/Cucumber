@@ -27,9 +27,30 @@ public class Hooks {
 
 
     @Before("@browser")
-    public void setUp(){
+    public void setUp()  {
+
+        try{
+            //if (System.getProperty("ambiente") == "local") {
+                String[] cmd = {
+
+                        "cd C:/Users/sebastian.arrejin/post-venta-movil",
+                        "npm run start"};
+
+                Runtime.getRuntime().exec(cmd);
+
+                Thread.sleep(20000);
+
+            //}
+            }catch(IOException e){
+            System.out.println("Estas codeando con los codos");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+
         LOGGER.log(Level.INFO, "Iniciando ambiente: "+System.getProperty("ambiente"));
         LOGGER.log(Level.INFO, "Ejecutando setUp..");
+
         driverManager = DriverManagerFactory.getManager(System.getProperty("browser"));
         driver = driverManager.getDriver();
         driver.get("about:blank");

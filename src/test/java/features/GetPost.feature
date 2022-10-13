@@ -17,6 +17,8 @@ Feature: Verify different GET operations using REST-assured
     Then I should see verify Get parameter
 
   @rest
-  Scenario: Verify Post operation
-    Given I perform POST operation for "/posts"
-  #  Then I should see verify GET parameter
+  Scenario: Verify Post operation for Profile
+    Given I perform POST operation for "/posts/{profileNo}/profile" with body
+    |name|profile|
+    |Sams|2      |
+    Then I should the body has name as "Sam"

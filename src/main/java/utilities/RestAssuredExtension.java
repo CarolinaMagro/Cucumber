@@ -19,6 +19,7 @@ public class RestAssuredExtension{
 
     public static RequestSpecification Request;
 
+
     public RestAssuredExtension(){
         //Arrange
         RequestSpecBuilder builder = new RequestSpecBuilder();
@@ -63,15 +64,11 @@ public class RestAssuredExtension{
     }
 
 
-    public ResponseOptions<Response> PostOpsWithBodyAndPathParams(String url, Map<String, String>pathParams, Map<String, String>body){
+    public static ResponseOptions<Response> PostOpsWithBodyAndPathParams(String url, Map<String, String> pathParams, Map<String, String> body) throws URISyntaxException {
         Request.pathParams(pathParams);
         Request.body(body);
-        try{
-            return Request.post(new URI(url));
-        }catch (URISyntaxException e){
-            e.printStackTrace();
-        }
-        return null;
+        return Request.post(url);
     }
 
 }
+

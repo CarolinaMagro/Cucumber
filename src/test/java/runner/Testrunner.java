@@ -17,7 +17,7 @@ import db.BaseDB;
         glue = {"seleniumgluecode"},
         plugin = {"json:test/report/cucumber_report.json"},
         snippets = SnippetType.CAMELCASE
-        ,tags = {"@rest"}
+        ,tags = {"@browser"}
 )
 
 public class Testrunner {
