@@ -34,8 +34,7 @@ public class Hooks {
     @Before("@browser")
     public void setUp()  {
 
-        initLocalServer();
-
+        startLocalServer();
         LOGGER.log(Level.INFO, "Iniciando ambiente: "+System.getProperty("ambiente"));
         LOGGER.log(Level.INFO, "Ejecutando setUp..");
 
@@ -79,7 +78,7 @@ public class Hooks {
         return driver;
     }
 
-    public void initLocalServer() {
+    public void startLocalServer() {
         if (System.getProperty("ambiente").equalsIgnoreCase("local")) {
             try {
                 String[] initServer = {"cmd.exe", "/c", "cd C:\\Users\\sebastian.arrejin\\post-venta-movil && npm run start"};
