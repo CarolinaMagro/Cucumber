@@ -28,15 +28,14 @@ public class Hooks {
 
     private static WebDriver driver;
     private DriverManager driverManager;
-    private Process pr;
+
 
 
     @Before("@browser")
     public void setUp()  {
 
-        startLocalServer();
-        LOGGER.log(Level.INFO, "Iniciando ambiente: "+System.getProperty("ambiente"));
-        LOGGER.log(Level.INFO, "Ejecutando setUp..");
+        LOGGER.log(Level.INFO, "Starting environment: "+System.getProperty("environment"));
+        LOGGER.log(Level.INFO, "Starting setUp..");
 
         driverManager = DriverManagerFactory.getManager(System.getProperty("browser"));
         driver = driverManager.getDriver();
@@ -60,8 +59,6 @@ public class Hooks {
 
     @After("@browser")
     public void tearDown(Scenario scenario) {
-
-
         if(scenario.isFailed()){
             byte[] screenshot= ((TakesScreenshot)driverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.embed(screenshot,"image/png");
@@ -69,8 +66,7 @@ public class Hooks {
 
         driverManager.quitDriver();
         LOGGER.log(Level.INFO, "Cerrando WebDriver");
-        closeLocalServer();
-        this.pr.destroyForcibly();
+
     }
 
     public static WebDriver getDriver(){
@@ -78,31 +74,5 @@ public class Hooks {
         return driver;
     }
 
-    public void startLocalServer() {
-        if (System.getProperty("ambiente").equalsIgnoreCase("local")) {
-            try {
-                String[] initServer = {"cmd.exe", "/c", "cd C:\\Users\\sebastian.arrejin\\post-venta-movil && npm run start"};
-                this.pr = Runtime.getRuntime().exec(initServer);
-                LOGGER.log(Level.INFO, "Starting Local server... ");
-
-                this.pr.wait(5000);
-            } catch (Exception e) {
-                LOGGER.log(Level.INFO, "Error starting local server..");
-            }
-        }
-    }
-
-    public void closeLocalServer() {
-        if (System.getProperty("ambiente").equalsIgnoreCase("local")) {
-            try {
-                String[] closeServer = {"cmd.exe", "/c", "taskkill /im node.exe /t /f\n"};
-                this.pr = Runtime.getRuntime().exec(closeServer);
-                this.pr.waitFor(5, SECONDS);
-                LOGGER.log(Level.INFO, "Closing Local server... ");
-            } catch (Exception e) {
-                LOGGER.log(Level.SEVERE, "Error closing server... ");
-            }
-        }
-    }
 
 }

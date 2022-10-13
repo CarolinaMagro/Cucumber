@@ -3,14 +3,15 @@ package pom;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "classpath:${ambiente}.properties"
+        "classpath:${environment}.properties"
 
 })
 public interface Ambiente extends Config {
 
+    String urlIamLitleTester();
 
-
-    String urlApp();
+    String urlPantallaPrincipal();
+    String urlCambioNim();
 
     String user();
 

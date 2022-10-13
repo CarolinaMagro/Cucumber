@@ -24,7 +24,7 @@ public class HomePage extends BasePage{
     }
 
     public void goToImALittleTester(){
-        getDriver().get(ambiente().urlApp());
+        getDriver().get(ambiente().urlIamLitleTester());
     }
 
 }

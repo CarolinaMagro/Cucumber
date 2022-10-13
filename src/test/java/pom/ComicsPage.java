@@ -21,7 +21,8 @@ public class ComicsPage extends BasePage{
     }
 
     public boolean isTitleComicsDisplayed() throws Exception {
-        return this.isDisplayed(titleLocator) && this.getText(titleLocator).equals(titlePage);
+        return false;
+        //return isDisplayed(titleLocator) && this.getText(titleLocator).equals(titlePage);
     }
 
 
