@@ -84,6 +84,13 @@
       <version>5.2.0</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>com.github.mcpat.apistubs</groupId>
+      <artifactId>cldc-1.1-stub</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <!-- Thanks for using https://jar-download.com -->
+
 
 
   </dependencies>
