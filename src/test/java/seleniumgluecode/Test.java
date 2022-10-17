@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 public class Test extends TestBase{
 
-    private int start;
+  /*  private int start;
     private int left;
     MongoDatabase mongoDataBase = null;
     Document mipcgamer = null;
@@ -97,5 +97,5 @@ public class Test extends TestBase{
         Assert.assertEquals(firstSlot, firstSlotDb);
         Assert.assertEquals(secondSlot, secondSlotDb);
 
-    }
+    }*/
 }
