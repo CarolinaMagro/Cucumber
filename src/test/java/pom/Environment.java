@@ -6,7 +6,7 @@ import org.aeonbits.owner.Config;
         "classpath:${environment}.properties"
 
 })
-public interface Ambiente extends Config {
+public interface Environment extends Config {
 
     String urlIamLitleTester();
 
@@ -26,7 +26,6 @@ public interface Ambiente extends Config {
    int mongo_database_port();
 
    String user_claro();
-
 
 
 }

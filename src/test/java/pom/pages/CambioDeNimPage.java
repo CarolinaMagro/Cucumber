@@ -1,13 +1,15 @@
-package pom;
+package pom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pom.BasePage;
 
-public class CambioDeNimPage extends BasePage{
+public class CambioDeNimPage extends BasePage {
 
         private String titlePage=ambiente().titlePage();
+
 
         @FindBy(xpath = "//*[contains(text(), 'Asignar Nuevo NIM')]")
         private WebElement titleCambioDeNimLocator;
@@ -50,7 +52,7 @@ public class CambioDeNimPage extends BasePage{
 
 
         public CambioDeNimPage(WebDriver driver){
-            super(driver);
+                super(driver);
         }
 
 

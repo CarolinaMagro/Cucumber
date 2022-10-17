@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import utils.LogHelper;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import db.BaseDB;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -17,10 +16,10 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/java/features/",
-        glue = {"seleniumgluecode"},
+        glue = {"glue"},
         plugin = {"json:test/report/cucumber_report.json"},
         snippets = SnippetType.CAMELCASE
-        ,tags = {"@browser"}
+        ,tags = {"@rest"}
 )
 
 public class Testrunner {
@@ -30,14 +29,18 @@ public class Testrunner {
 
     @BeforeClass()
     public static void setUp(){
-        startLocalServer();
-        LOGGER.log(Level.INFO, "Test execution begins...");
 
-    }
+        LOGGER.log(Level.INFO, "Test browser execution begins...");
+        LOGGER.log(Level.INFO, "Starting environment: "+System.getProperty("environment"));
+        //startLocalServer();
+
+        }
+
+
 
     @AfterClass
     public static void teardown(){
-        closeLocalServer();
+        //closeLocalServer();
         try {
             LOGGER.log(Level.INFO, "Generating report...");
             String[] cmd = {"cmd.exe", "/c", "npm run report"};
@@ -54,11 +57,11 @@ public class Testrunner {
     private static void startLocalServer() {
         if (System.getProperty("environment").equalsIgnoreCase("local")) {
             try {
-                String[] initServer = {"cmd.exe", "/c", "cd C:\\Users\\sebastian.arrejin\\post-venta-movil && npm run start"};
-                pr = Runtime.getRuntime().exec(initServer);
-                LOGGER.log(Level.INFO, "Starting Local server... ");
+                String[] initAppServer = {"cmd.exe", "/c", "cd C:\\Users\\sebastian.arrejin\\post-venta-movil && npm run start"};
+                pr = Runtime.getRuntime().exec(initAppServer);
 
-                pr.wait(5000);
+                LOGGER.log(Level.INFO, "Starting Local server... ");
+                Thread.sleep(4000);
             } catch (Exception e) {
                 LOGGER.log(Level.INFO, "Error starting local server..");
             }
@@ -70,7 +73,6 @@ public class Testrunner {
             try {
                 String[] closeServer = {"cmd.exe", "/c", "taskkill /im node.exe /t /f\n"};
                 pr = Runtime.getRuntime().exec(closeServer);
-                pr.waitFor(5, SECONDS);
                 LOGGER.log(Level.INFO, "Closing Local server... ");
             } catch (Exception e) {
                 LOGGER.log(Level.SEVERE, "Error closing server... ");

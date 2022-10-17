@@ -1,4 +1,4 @@
-package seleniumgluecode;
+package glue;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -18,30 +18,19 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-
 
 public class Hooks {
 
     private static final Logger LOGGER = LogHelper.getLogger(Hooks.class);
-
-
     private static WebDriver driver;
     private DriverManager driverManager;
 
 
-
     @Before("@browser")
     public void setUp()  {
-
-        LOGGER.log(Level.INFO, "Starting environment: "+System.getProperty("environment"));
-        LOGGER.log(Level.INFO, "Starting setUp..");
-
         driverManager = DriverManagerFactory.getManager(System.getProperty("browser"));
         driver = driverManager.getDriver();
         driver.get("about:blank");
-
-
         driver.manage().window().maximize();
     }
 
@@ -52,8 +41,14 @@ public class Hooks {
     }
 
     @Before("@rest")
-    public void RestSetUp(){
+    public void RestSetUp() throws IOException {
         RestAssuredExtension restAssuredExtension = new RestAssuredExtension();
+
+        //String[] initJsonServer = {"cmd.exe", "/c", "json-server --watch db.json --port 8000"};
+        //Runtime.getRuntime().exec(initJsonServer);
+
+
+
     }
 
 
@@ -63,14 +58,10 @@ public class Hooks {
             byte[] screenshot= ((TakesScreenshot)driverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.embed(screenshot,"image/png");
         }
-
         driverManager.quitDriver();
-        LOGGER.log(Level.INFO, "Cerrando WebDriver");
-
     }
 
     public static WebDriver getDriver(){
-
         return driver;
     }
 

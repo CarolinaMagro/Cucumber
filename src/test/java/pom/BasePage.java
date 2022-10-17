@@ -4,7 +4,7 @@ import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import seleniumgluecode.Hooks;
+import glue.Hooks;
 import utils.LogHelper;
 
 import java.util.logging.Level;
@@ -13,20 +13,20 @@ import java.util.logging.Logger;
 public class BasePage {
 
     private WebDriver driver;
-    private static Ambiente ambiente;
+    private static Environment environment;
     private static final Logger LOGGER = LogHelper.getLogger(Hooks.class);
 
     public WebDriver getDriver() {
         return driver;
     }
 
-    public Ambiente ambiente() {
-        return this.ambiente;
+    public Environment ambiente() {
+        return this.environment;
     }
 
 
     public BasePage(WebDriver driver) {
-        this.ambiente = ConfigFactory.create(Ambiente.class);
+        this.environment = ConfigFactory.create(Environment.class);
         this.driver = driver;
     }
 

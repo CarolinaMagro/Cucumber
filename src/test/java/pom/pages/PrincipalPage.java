@@ -1,10 +1,11 @@
-package pom;
+package pom.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pom.BasePage;
 
-public class PrincipalPage extends BasePage{
+public class PrincipalPage extends BasePage {
 
 
 

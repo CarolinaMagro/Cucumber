@@ -1,12 +1,11 @@
-package seleniumgluecode;
+package glue;
 
 
+import junit.framework.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import pom.CambioDeNimPage;
-import pom.ComicsPage;
-import pom.HomePage;
-import pom.PrincipalPage;
+import pom.pages.CambioDeNimPage;
+import pom.pages.PrincipalPage;
 import utils.LogHelper;
 
 import java.util.logging.Logger;
@@ -16,7 +15,5 @@ public class TestBase {
     protected WebDriver driver = Hooks.getDriver();
     protected CambioDeNimPage cambioDeNimPage = PageFactory.initElements(driver, CambioDeNimPage.class);
     protected PrincipalPage principalPage = PageFactory.initElements(driver, PrincipalPage.class);
-    protected HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-    protected ComicsPage comicsPage = PageFactory.initElements(driver, ComicsPage.class);
 
 }

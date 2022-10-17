@@ -1,14 +1,11 @@
-package seleniumgluecode;
+package glue.FrontTests;
 
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import glue.TestBase;
 import org.junit.Assert;
-import utils.LogHelper;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class PrincipalPageTest extends TestBase {
 
