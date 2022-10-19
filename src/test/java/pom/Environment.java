@@ -3,14 +3,15 @@ package pom;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "classpath:${ambiente}.properties"
+        "classpath:${environment}.properties"
 
 })
-public interface Ambiente extends Config {
+public interface Environment extends Config {
 
+    String urlIamLitleTester();
 
-
-    String urlApp();
+    String urlPantallaPrincipal();
+    String urlCambioNim();
 
     String user();
 
@@ -25,7 +26,6 @@ public interface Ambiente extends Config {
    int mongo_database_port();
 
    String user_claro();
-
 
 
 }

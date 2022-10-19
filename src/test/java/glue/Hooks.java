@@ -1,8 +1,9 @@
-package seleniumgluecode;
+package glue;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+
 import db.MongoDBHelper;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -13,6 +14,7 @@ import utilities.RestAssuredExtension;
 import utils.LogHelper;
 
 import java.io.IOException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,21 +22,15 @@ import java.util.logging.Logger;
 public class Hooks {
 
     private static final Logger LOGGER = LogHelper.getLogger(Hooks.class);
-
-
     private static WebDriver driver;
     private DriverManager driverManager;
 
 
     @Before("@browser")
-    public void setUp(){
-        LOGGER.log(Level.INFO, "Iniciando ambiente: "+System.getProperty("ambiente"));
-        LOGGER.log(Level.INFO, "Ejecutando setUp..");
+    public void setUp()  {
         driverManager = DriverManagerFactory.getManager(System.getProperty("browser"));
         driver = driverManager.getDriver();
         driver.get("about:blank");
-
-
         driver.manage().window().maximize();
     }
 
@@ -45,25 +41,29 @@ public class Hooks {
     }
 
     @Before("@rest")
-    public void RestSetUp(){
+    public void RestSetUp() throws IOException {
         RestAssuredExtension restAssuredExtension = new RestAssuredExtension();
+
+        //String[] initJsonServer = {"cmd.exe", "/c", "json-server --watch db.json --port 8000"};
+        //Runtime.getRuntime().exec(initJsonServer);
+
+
+
     }
 
 
     @After("@browser")
-    public void tearDown(Scenario scenario){
+    public void tearDown(Scenario scenario) {
         if(scenario.isFailed()){
             byte[] screenshot= ((TakesScreenshot)driverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.embed(screenshot,"image/png");
         }
         driverManager.quitDriver();
-        LOGGER.log(Level.INFO, "Cerrando WebDriver");
-
     }
 
     public static WebDriver getDriver(){
-
         return driver;
     }
+
 
 }

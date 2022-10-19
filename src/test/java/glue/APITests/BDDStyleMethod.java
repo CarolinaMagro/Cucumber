@@ -1,4 +1,4 @@
-package seleniumgluecode;
+package glue.APITests;
 
 import io.restassured.http.ContentType;
 import org.hamcrest.core.Is;
@@ -15,7 +15,7 @@ public class BDDStyleMethod {
 
     public static void SimpleGETPost(String postNumber) {
         given().contentType(ContentType.JSON).
-                when().get(String.format("http://localhost:3000/posts/%s", postNumber)).
+                when().get(String.format("http://localhost:8000/posts/%s", postNumber)).
                 then().body("author", is("Karthik KK"));
     }
 
@@ -24,9 +24,9 @@ public class BDDStyleMethod {
         given()
                 .contentType(ContentType.JSON)
         .when()
-                .get("http://localhost:3000/posts/")
+                .get("http://localhost:8000/posts/")
         .then()
-                .body("author", containsInAnyOrder("Karthik KK", "Karthik KK",null));
+                .body("author", containsInAnyOrder("Karthik KK", "Karthik KK",null,"ExecuteAutomation"));
     }
 
 
@@ -38,7 +38,7 @@ public class BDDStyleMethod {
                 with()
                 .pathParams("post", "1").
                 when()
-                .get("http://localhost:3000/posts/{post}").
+                .get("http://localhost:8000/posts/{post}").
                 then()
                 .body("author", containsString("Karthik KK"));
     }
@@ -46,7 +46,7 @@ public class BDDStyleMethod {
 
     public static void PerformPOSTWithBodyParameter() {
         HashMap<String,String> postContent = new HashMap<>();
-        postContent.put("id", "5");
+        postContent.put("id", "4");
         postContent.put("title", "Robotium course");
         postContent.put("author", "ExecuteAutomation");
 
@@ -55,7 +55,7 @@ public class BDDStyleMethod {
                 with()
                 .body(postContent).
                 when()
-                .post("http://localhost:3000/posts").
+                .post("http://localhost:8000/posts").
                 then()
                 .body("author", Is.is("ExecuteAutomation"));
     }
@@ -64,9 +64,9 @@ public class BDDStyleMethod {
 
         given()
                 .contentType(ContentType.JSON)
-                .queryParam("id",1).
+                .queryParam("id","1").
         when()
-                .get("http://localhost:3000/posts/").
+                .get("http://localhost:8000/post/").
         then()
                 .body("author", containsString("Karthik KK"));
     }

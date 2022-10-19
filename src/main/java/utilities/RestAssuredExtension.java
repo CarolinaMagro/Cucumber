@@ -1,8 +1,10 @@
 package utilities;
 
+import cucumber.api.java.it.Ma;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseOptions;
 import io.restassured.specification.RequestSpecification;
@@ -14,15 +16,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.patch;
 
 public class RestAssuredExtension{
 
     public static RequestSpecification Request;
 
+
     public RestAssuredExtension(){
         //Arrange
         RequestSpecBuilder builder = new RequestSpecBuilder();
-        builder.setBaseUri("http://localhost:3000");
+        builder.setBaseUri("http://localhost:8000");
         builder.setContentType(ContentType.JSON);
         RequestSpecification requestSpec = builder.build();
         Request = given().spec(requestSpec);
@@ -50,6 +54,12 @@ public class RestAssuredExtension{
         return null;
     }
 
+    public static ResponseOptions<Response> PUTOpsWithBodyAndPathParams(String url, Map<String, String> body, Map<String, String> pathParams) {
+        Request.body(body);
+        Request.pathParams(pathParams);
+        return Request.put(url);
+    }
+
 
     public ResponseOptions<Response> GetOpsQueryParams(String url, String queryParams){
         try{
@@ -63,16 +73,37 @@ public class RestAssuredExtension{
     }
 
 
-    public ResponseOptions<Response> PostOpsWithBodyAndPathParams(String url, Map<String, String>pathParams, Map<String, String>body){
+    public static ResponseOptions<Response> PostOpsWithBodyAndPathParams(String url, Map<String, String> pathParams, Map<String, String> body) throws URISyntaxException {
         Request.pathParams(pathParams);
         Request.body(body);
-        try{
-            return Request.post(new URI(url));
-        }catch (URISyntaxException e){
-            e.printStackTrace();
-        }
-        return null;
+        return Request.post(url);
+    }
+
+    public static ResponseOptions<Response> PostOpsWithBody(String url, Map<String,String> body){
+        Request.body(body);
+        return Request.post(url);
+    }
+
+    public static ResponseOptions<Response> DeleteOpsWithPathParams(String url, Map<String, String>pathParams){
+        Request.pathParams(pathParams);
+        return Request.delete(url);
+    }
+
+    public static ResponseOptions<Response> GetWithPathParams(String url, Map<String, String> pathParams){
+        Request.pathParams(pathParams);
+        return Request.get(url);
     }
 
 
+     public static ResponseOptions<Response> GetOpsWithToken(String url, String token){
+        try{
+            Request.header(new Header("Authorization", "Bearer "+ token));
+            return Request.get(new URI(url));
+        }catch (URISyntaxException e){
+            e.printStackTrace();
+        }
+         return null;
+     }
+
 }
+
