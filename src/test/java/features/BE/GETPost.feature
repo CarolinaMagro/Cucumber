@@ -1,5 +1,12 @@
 Feature: Verify different GET operations using REST-assured
 
+
+  Background:
+    Given I perform authentication operation for "/auth/login" with body
+      |email            |password      |
+      |seba@email.com   |seba123       |
+
+
   @rest
   Scenario: Verify one author of the post
     Given I perform GET operation for "/posts"

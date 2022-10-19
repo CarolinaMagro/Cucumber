@@ -1,6 +1,13 @@
 Feature: PUTPost
     Verify put post operation
 
+
+  Background:
+    Given I perform authentication operation for "/auth/login" with body
+      |email            |password      |
+      |seba@email.com   |seba123       |
+
+
   @rest
   Scenario: Verify PUT operation after POST
     Given I ensure to perform POST operation for "/posts" with body as

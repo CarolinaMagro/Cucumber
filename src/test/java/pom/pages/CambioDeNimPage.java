@@ -87,6 +87,7 @@ public class CambioDeNimPage extends BasePage {
 
         public void clickOnGuardarNim() throws Exception {
             this.click(btnGuardarNim);
+
         }
 
 

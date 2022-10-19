@@ -4,6 +4,7 @@ import cucumber.api.java.it.Ma;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseOptions;
 import io.restassured.specification.RequestSpecification;
@@ -83,7 +84,6 @@ public class RestAssuredExtension{
         return Request.post(url);
     }
 
-
     public static ResponseOptions<Response> DeleteOpsWithPathParams(String url, Map<String, String>pathParams){
         Request.pathParams(pathParams);
         return Request.delete(url);
@@ -93,6 +93,17 @@ public class RestAssuredExtension{
         Request.pathParams(pathParams);
         return Request.get(url);
     }
+
+
+     public static ResponseOptions<Response> GetOpsWithToken(String url, String token){
+        try{
+            Request.header(new Header("Authorization", "Bearer "+ token));
+            return Request.get(new URI(url));
+        }catch (URISyntaxException e){
+            e.printStackTrace();
+        }
+         return null;
+     }
 
 }
 

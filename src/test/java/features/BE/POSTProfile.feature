@@ -1,5 +1,11 @@
 Feature: Verify different GET operations using REST-assured
 
+
+  Background:
+    Given I perform authentication operation for "/auth/login" with body
+      |email            |password      |
+      |seba@email.com   |seba123       |
+
   @rest
   Scenario: Verify Post operation for Profile
     Given I perform POST operation for "/posts/{profileNo}/profile" with body

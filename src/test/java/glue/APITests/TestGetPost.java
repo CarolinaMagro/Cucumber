@@ -5,6 +5,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.hu.Ha;
 import cucumber.api.java.it.Ma;
 import glue.TestBase;
 import io.restassured.response.Response;
@@ -24,12 +25,13 @@ public class TestGetPost extends TestBase {
 
     private static ResponseOptions<Response> response;
 
-    @Given("^I perform GET operation for \"([^\"]*)\"$")
+
+
+    @Given("^I  Perform GET operation  for \"([^\"]*)\"$")
     public void iPerformGETOperationFor(String url) throws Throwable {
-        //given().contentType(ContentType.JSON);
+        response = RestAssuredExtension.GetOpsWithToken(url, response.getBody().jsonPath().get("access token"));
+
     }
-
-
 
 
     @And("^I perform GET for the post number \"([^\"]*)\"$")
@@ -147,6 +149,19 @@ public class TestGetPost extends TestBase {
 
         RestAssuredExtension.PUTOpsWithBodyAndPathParams(url,body,pathParams);
     }
+
+
+    @Given("^I perform authentication operation for \"([^\"]*)\" with body$")
+    public void iPerformAuthenticationOperationForWithBody(String url, DataTable table) throws Throwable {
+        List<List<String>> data = table.raw();
+
+        HashMap<String ,String> body = new HashMap<>();
+        body.put("email", data.get(1).get(0));
+        body.put("password", data.get(1).get(1));
+        response=RestAssuredExtension.PostOpsWithBody(url, body);
+
+    }
+
 
 
 }
