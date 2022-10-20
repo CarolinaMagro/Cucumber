@@ -27,30 +27,24 @@ public class TestGetPost extends TestBase {
 
 
 
-    @Given("^I  Perform GET operation  for \"([^\"]*)\"$")
+    @Given("^I perform GET operation for \"([^\"]*)\"$")
     public void iPerformGETOperationFor(String url) throws Throwable {
-        response = RestAssuredExtension.GetOpsWithToken(url, response.getBody().jsonPath().get("access token"));
+        String token = response.getBody().jsonPath().get("access_token");
+        response = null;
+        response = RestAssuredExtension.GetOpsWithToken(url, token);
 
-    }
-
-
-    @And("^I perform GET for the post number \"([^\"]*)\"$")
-    public void iPerformGETForThePostNumber(String postNumber) throws Throwable {
-        //when().get(String.format("http://localhost:3000/post/%s",postNumber)).
-        //        then().body("author", is("Karthik KK"));
-       BDDStyleMethod.SimpleGETPost(postNumber);
-        //BDDStyleMethod.PerformPOSTWithBodyParameter();
     }
 
 
     @Then("^I should see the author name as \"([^\"]*)\"$")
     public void iShouldSeeTheAuthorNameAs(String author) throws Throwable {
-        //assertThat(this.response.getBody().jsonPath().get("author"), hasItem("Karthik KK"));
+        assertThat(response.getBody().jsonPath().get("author"), hasItem(author));
     }
 
     @Then("^I should see the author names$")
     public void iShouldSeeTheAuthorNames() throws Throwable {
-        BDDStyleMethod.PerformContainsCollection();
+        assertThat(response.getBody().jsonPath().get("author"),hasItems("Karthik KK", "Karthik KK",null,"ExecuteAutomation"));
+
     }
 
 
@@ -58,12 +52,9 @@ public class TestGetPost extends TestBase {
     @Then("^I should see verify Get parameter$")
     public void iShouldSeeVerifyGetParameter() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        BDDStyleMethod.PerformPathParameter();
-
+        //BDDStyleMethod.PerformPathParameter();
+        assertThat(response.getBody().jsonPath().get("author"), hasItem("Karthik KK"));
     }
-
-
-
 
     @Given("^I ensure to perform POST operation for \"([^\"]*)\" with body as$")
     public void iEnsureToPerformPOSTOperationForWithBodyAs(String url, DataTable table) throws Throwable {
@@ -72,18 +63,21 @@ public class TestGetPost extends TestBase {
         body.put("id", data.get(1).get(0));
         body.put("title", data.get(1).get(1));
         body.put("author", data.get(1).get(2));
+        String token= response.getBody().jsonPath().get("access_token");
+        response = null;
+        response = RestAssuredExtension.PostOpsWithBodyAndToken(url,body, token);
 
-        RestAssuredExtension.PostOpsWithBody(url,body);
     }
 
     @And("^I  Perform DELETE operation  for \"([^\"]*)\"$")
     public void iPerformDELETEOperationFor(String url, DataTable table) throws Throwable {
         List<List<String>> data = table.raw();
-
         Map<String, String> pathParams = new HashMap<>();
         pathParams.put("postid", data.get(1).get(0));
+        String token = response.getBody().jsonPath().get("access_token");
+        response = null;
+        response = RestAssuredExtension.DeleteOpsWithPathParamsAndToken(url, pathParams,token);
 
-        RestAssuredExtension.DeleteOpsWithPathParams(url, pathParams);
     }
 
     @And("^I perform GET operation with path parameter for \"([^\"]*)\"$")
@@ -92,8 +86,9 @@ public class TestGetPost extends TestBase {
 
         Map<String, String > pathParams = new HashMap<>();
         pathParams.put("postid", data.get(1).get(0));
-
-        response = RestAssuredExtension.GetWithPathParams(url, pathParams);
+        String token= response.getBody().jsonPath().get("access_token");
+        response=null;
+        response = RestAssuredExtension.GetWithPathParamsAndToken(url, pathParams,token);
     }
 
     @Then("^I \"([^\"]*)\" see the body with title as \"([^\"]*)\"$")
@@ -120,9 +115,11 @@ public class TestGetPost extends TestBase {
         HashMap<String,String> pathParams = new HashMap<>();
         pathParams.put("profileNo",data.get(1).get(1));
 
+        String token = response.getBody().jsonPath().get("access_token");
+        response=null;
 
         //perform post operation
-        response=RestAssuredExtension.PostOpsWithBodyAndPathParams(url, pathParams, body);
+        response=RestAssuredExtension.PostOpsWithBodyAndPathParamsAndToken(url, pathParams, body, token);
     }
 
     @Then("^I should the body has name as \"([^\"]*)\"$")

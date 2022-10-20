@@ -1,5 +1,4 @@
-Feature: DeletePosts
-    Test the delete operation
+Feature: Delete Post
 
   Background:
     Given I perform authentication operation for "/auth/login" with body
@@ -18,4 +17,4 @@ Feature: DeletePosts
     And I perform GET operation with path parameter for "/posts/{postid}/"
     |postid|
     |6     |
-    Then I "should not" see the body with title as "API Testing course  "
+    Then I "should not" see the body with title as "API Testing course"

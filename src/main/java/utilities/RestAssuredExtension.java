@@ -54,15 +54,43 @@ public class RestAssuredExtension{
         return null;
     }
 
+    public static ResponseOptions<Response> GetOpsWithToken(String url, String token){
+        //Act
+        try{
+            Request.header(new Header("Authorization", "Bearer "+ token));
+            return Request.get(new URI(url));
+        }catch (URISyntaxException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     public static ResponseOptions<Response> PUTOpsWithBodyAndPathParams(String url, Map<String, String> body, Map<String, String> pathParams) {
         Request.body(body);
         Request.pathParams(pathParams);
         return Request.put(url);
     }
-
+    public static ResponseOptions<Response> PUTOpsWithBodyAndPathParamsAndToken(String url, Map<String, String> body, Map<String, String> pathParams, String token) {
+        Request.header(new Header("Authorization", "Bearer "+ token));
+        Request.body(body);
+        Request.pathParams(pathParams);
+        return Request.put(url);
+    }
 
     public ResponseOptions<Response> GetOpsQueryParams(String url, String queryParams){
         try{
+            Request.queryParam(queryParams);
+            return Request.get(new URI(url));
+
+        }catch (URISyntaxException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public ResponseOptions<Response> GetOpsQueryParamsAndToken(String url, String queryParams, String token){
+        try{
+            Request.header(new Header("Authorization", "Bearer "+ token));
             Request.queryParam(queryParams);
             return Request.get(new URI(url));
 
@@ -78,13 +106,31 @@ public class RestAssuredExtension{
         Request.body(body);
         return Request.post(url);
     }
+    public static ResponseOptions<Response> PostOpsWithBodyAndPathParamsAndToken(String url, Map<String, String> pathParams, Map<String, String> body,String token) throws URISyntaxException {
+        Request.header(new Header("Authorization", "Bearer "+ token));
+        Request.pathParams(pathParams);
+        Request.body(body);
+        return Request.post(url);
+    }
+
 
     public static ResponseOptions<Response> PostOpsWithBody(String url, Map<String,String> body){
         Request.body(body);
         return Request.post(url);
     }
+    public static ResponseOptions<Response> PostOpsWithBodyAndToken(String url, Map<String,String> body,String token){
+        Request.header(new Header("Authorization", "Bearer "+ token));
+        Request.body(body);
+        return Request.post(url);
+    }
+
 
     public static ResponseOptions<Response> DeleteOpsWithPathParams(String url, Map<String, String>pathParams){
+        Request.pathParams(pathParams);
+        return Request.delete(url);
+    }
+    public static ResponseOptions<Response> DeleteOpsWithPathParamsAndToken(String url, Map<String, String>pathParams, String token){
+        Request.header(new Header("Authorization", "Bearer "+ token));
         Request.pathParams(pathParams);
         return Request.delete(url);
     }
@@ -93,17 +139,14 @@ public class RestAssuredExtension{
         Request.pathParams(pathParams);
         return Request.get(url);
     }
+    public static ResponseOptions<Response> GetWithPathParamsAndToken(String url, Map<String, String> pathParams, String token){
+        Request.header(new Header("Authorization", "Bearer "+ token));
+        Request.pathParams(pathParams);
+        return Request.get(url);
+    }
 
 
-     public static ResponseOptions<Response> GetOpsWithToken(String url, String token){
-        try{
-            Request.header(new Header("Authorization", "Bearer "+ token));
-            return Request.get(new URI(url));
-        }catch (URISyntaxException e){
-            e.printStackTrace();
-        }
-         return null;
-     }
+
 
 }
 

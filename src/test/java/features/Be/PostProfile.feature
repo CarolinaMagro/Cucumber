@@ -1,4 +1,4 @@
-Feature: Verify different GET operations using REST-assured
+Feature: Post
 
 
   Background:
