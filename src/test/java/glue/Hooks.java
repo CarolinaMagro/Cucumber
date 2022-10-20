@@ -15,7 +15,6 @@ import utils.LogHelper;
 
 import java.io.IOException;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -43,9 +42,6 @@ public class Hooks {
     @Before("@rest")
     public void RestSetUp() throws IOException {
         RestAssuredExtension restAssuredExtension = new RestAssuredExtension();
-
-        //String[] initJsonServer = {"cmd.exe", "/c", "json-server --watch db.json --port 8000"};
-        //Runtime.getRuntime().exec(initJsonServer);
 
 
 
