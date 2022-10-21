@@ -20,7 +20,7 @@ public class BasePage {
         return driver;
     }
 
-    public Environment ambiente() {
+    public Environment environment() {
         return this.environment;
     }
 
