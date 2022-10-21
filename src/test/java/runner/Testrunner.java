@@ -20,7 +20,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
         glue = {"glue"},
         plugin = {"json:test/report/cucumber_report.json"},
         snippets = SnippetType.CAMELCASE
-        ,tags = {"@rest"}
+        ,tags = {"@rest,@browser"}
 )
 
 public class Testrunner {
