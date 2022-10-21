@@ -10,7 +10,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import runner.browser_manager.DriverManager;
 import runner.browser_manager.DriverManagerFactory;
-import utilities.RestAssuredExtension;
 import utils.LogHelper;
 
 import java.io.IOException;

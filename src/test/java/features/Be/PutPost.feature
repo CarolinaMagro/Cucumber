@@ -1,3 +1,4 @@
+@ApiRest
 Feature: PUT Post
 
 

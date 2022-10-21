@@ -1,3 +1,4 @@
+@ApiRest
 Feature: Delete Post
 
   Background:

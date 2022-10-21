@@ -42,6 +42,12 @@ public class Testrunner {
     @AfterClass
     public static void teardown(){
         //closeLocalServer();
+
+
+
+
+
+
         try {
             LOGGER.log(Level.INFO, "Generating report...");
             String[] cmd = {"cmd.exe", "/c", "npm run report"};
@@ -52,6 +58,8 @@ public class Testrunner {
             ex.printStackTrace();
         }
     }
+
+
 
 
 

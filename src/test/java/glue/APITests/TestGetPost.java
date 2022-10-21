@@ -5,13 +5,11 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.hu.Ha;
-import cucumber.api.java.it.Ma;
 import glue.TestBase;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseOptions;
 import org.hamcrest.core.IsNot;
-import utilities.RestAssuredExtension;
+import glue.RestAssuredExtension;
 
 import java.util.HashMap;
 import java.util.List;

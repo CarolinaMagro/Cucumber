@@ -1,4 +1,4 @@
-@functional
+@EndToEnd
 Feature: Cambio de Nim
   Como QA automation quiero ingresar a la pantalla Cambio de Nim para testear su correcto funcionamiento
 

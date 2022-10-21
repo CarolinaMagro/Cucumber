@@ -1,3 +1,4 @@
+@ApiRest
 Feature: GET Post
 
 

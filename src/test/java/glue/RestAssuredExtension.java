@@ -1,4 +1,4 @@
-package utilities;
+package glue;
 
 import cucumber.api.java.it.Ma;
 import io.restassured.RestAssured;
