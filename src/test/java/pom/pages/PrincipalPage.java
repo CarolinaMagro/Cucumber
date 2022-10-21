@@ -29,7 +29,7 @@ public class PrincipalPage extends BasePage {
         }
 
         public void goToPrincipalPage(){
-            getDriver().get(ambiente().urlPantallaPrincipal());
+            getDriver().get(environment().urlPantallaPrincipal());
         }
 
     }

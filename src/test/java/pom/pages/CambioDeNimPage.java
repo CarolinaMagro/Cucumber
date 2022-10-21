@@ -8,7 +8,7 @@ import pom.BasePage;
 
 public class CambioDeNimPage extends BasePage {
 
-        private String titlePage=ambiente().titlePage();
+        private String titlePage=environment().titlePage();
 
 
         @FindBy(xpath = "//*[contains(text(), 'Asignar Nuevo NIM')]")
@@ -97,7 +97,7 @@ public class CambioDeNimPage extends BasePage {
         }
 
         public void goToCambioDeNimPage(){
-            getDriver().get(ambiente().urlCambioNim());
+            getDriver().get(environment().urlCambioNim());
         }
 
 
