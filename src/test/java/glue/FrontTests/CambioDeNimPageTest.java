@@ -26,15 +26,15 @@ public class CambioDeNimPageTest extends TestBase {
         List<List<String>> data = table.raw();
         //setea Campos
 
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         cambioDeNimPage.setInputNumeroActual(data.get(1).get(0));
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         cambioDeNimPage.setInputCodigoArea(data.get(1).get(1));
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         cambioDeNimPage.setInputBloque(data.get(1).get(2));
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         cambioDeNimPage.selectOptionCombo(data.get(1).get(3));
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
     }
 

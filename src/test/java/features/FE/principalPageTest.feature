@@ -1,4 +1,4 @@
-@functional
+@EndToEnd
 Feature: Principal Page
   Como QAautomation quiero ingresar a la pantalla principal para testear su correcto funcionamiento
 
