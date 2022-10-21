@@ -14,54 +14,23 @@ report.generate({
     metadata:{
         browser: {
             name: 'chrome',
-            version: 'Unknow'
+            version: '60'
         },
         device: 'Local test machine',
         platform: {
-            name: 'Windows'
-            //,  version: '10 Pro'
+            name: 'Windows',
+              version: '10 Pro'
         },
     },
-    metadata:{
-            browser: {
-                name: 'safari',
-                version: 'Unknow'
-            },
-            device: 'Local test machine',
-            platform: {
-                name: 'Ubuntu'
-                //,  version: '10 Pro'
-            },
-        },
-    metadata:{
-            browser: {
-                name: 'firefox',
-                version: 'Unknow'
-            },
-            device: 'Local test machine',
-            platform: {
-                name: 'Ubuntu'
-                //,  version: '10 Pro'
-            },
-        },
 
-    metadata:{
-            browser: {
-                name: 'edge',
-                version: 'Unknow'
-            },
-            device: 'Local test machine',
-            platform: {
-                name: 'Solaris'
-                //,  version: '10 Pro'
-            },
-        },
 
     customData: {
         title: 'Run info',
         data: [
             {label: 'Project', value: 'CLA022'},
-            {label: 'Release', value: 'MVP 1.0'}
+            {label: 'Release', value: 'MVP 1.0'},
+            {label: 'Browser', value: 'chrome'},
+            {label: 'Environment', value: 'MVP 1.0'}
         ]
     }
 }
