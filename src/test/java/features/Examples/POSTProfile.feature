@@ -1,4 +1,5 @@
-Feature: Verify different GET operations using REST-assured
+@ApiRest
+Feature: Post
 
 
   Background:

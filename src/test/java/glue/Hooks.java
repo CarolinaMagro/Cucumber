@@ -42,8 +42,6 @@ public class Hooks {
     public void RestSetUp() throws IOException {
         RestAssuredExtension restAssuredExtension = new RestAssuredExtension();
 
-
-
     }
 
 

@@ -1,4 +1,4 @@
-package glue.FrontTests;
+package glue.FrontEndSteps;
 
 
 import cucumber.api.java.en.Given;

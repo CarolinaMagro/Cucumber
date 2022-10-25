@@ -1,152 +1,122 @@
 package glue;
 
-import cucumber.api.java.it.Ma;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
-import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseOptions;
 import io.restassured.specification.RequestSpecification;
-import org.hamcrest.core.Is;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.patch;
 
-public class RestAssuredExtension{
+public class RestAssuredExtension {
 
-    public static RequestSpecification Request;
+    private RequestSpecBuilder builder = new RequestSpecBuilder();
+    private String method;
+    private String url;
 
+    /**
+     * RestAssuredExtension constructor to pass the initial settings for the following method
+     * @param url
+     * @param uri
+     * @param method
+     * @param token
+     */
+    public RestAssuredExtension(String url, String uri, String method, String token){
+        //this.url="http://localhost:8000"+uri;
+        this.url=url+uri;
+        this.method= method;
+
+        if (token !=null)
+            builder.addHeader("Authorization", "Bearer "+ token);
+    }
 
     public RestAssuredExtension(){
-        //Arrange
-        RequestSpecBuilder builder = new RequestSpecBuilder();
-        builder.setBaseUri("http://localhost:8000");
-        builder.setContentType(ContentType.JSON);
-        RequestSpecification requestSpec = builder.build();
-        Request = given().spec(requestSpec);
-    }
-
-    public static void GetOpsWithPathParameters(String url, Map<String, String> pathParams){
-        //Act
-        Request.pathParams(pathParams);
-        try {
-            Request.get(new URI(url));
-        }catch (URISyntaxException e){
-            e.printStackTrace();
-        }
     }
 
 
+    /**
+     * Execute API to execute the API for GET/POST/DELETE
+     * @return ResponseOptions <Response>
+     */
+    private ResponseOptions<Response> ExecuteAPI(){
+        RequestSpecification requestSpecification = builder.build();
+        RequestSpecification request = RestAssured.given();
+        request.contentType(ContentType.JSON);
+        request.spec(requestSpecification);
 
-    public static ResponseOptions<Response> GetOps(String url){
-        //Act
-        try{
-            return Request.get(new URI(url));
-        }catch (URISyntaxException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
 
-    public static ResponseOptions<Response> GetOpsWithToken(String url, String token){
-        //Act
-        try{
-            Request.header(new Header("Authorization", "Bearer "+ token));
-            return Request.get(new URI(url));
-        }catch (URISyntaxException e){
-            e.printStackTrace();
-        }
+        if(this.method.equalsIgnoreCase(APIConstant.ApiMethods.POST))
+            return request.post(this.url);
+        else if(this.method.equalsIgnoreCase(APIConstant.ApiMethods.GET))
+            return request.get(this.url);
+        else if(this.method.equalsIgnoreCase(APIConstant.ApiMethods.DELETE))
+            return request.delete(this.url);
+        else if(this.method.equalsIgnoreCase(APIConstant.ApiMethods.PUT))
+            return request.put(this.url);
         return null;
     }
 
 
-    public static ResponseOptions<Response> PUTOpsWithBodyAndPathParams(String url, Map<String, String> body, Map<String, String> pathParams) {
-        Request.body(body);
-        Request.pathParams(pathParams);
-        return Request.put(url);
-    }
-    public static ResponseOptions<Response> PUTOpsWithBodyAndPathParamsAndToken(String url, Map<String, String> body, Map<String, String> pathParams, String token) {
-        Request.header(new Header("Authorization", "Bearer "+ token));
-        Request.body(body);
-        Request.pathParams(pathParams);
-        return Request.put(url);
+    /**
+     * Authenticate to get token variable
+     * @param body
+     * @return String token
+     */
+    public String Authenticate(Object body){
+        builder.setBody(body);
+        return ExecuteAPI().getBody().jsonPath().get("access_token");
     }
 
-    public ResponseOptions<Response> GetOpsQueryParams(String url, String queryParams){
-        try{
-            Request.queryParam(queryParams);
-            return Request.get(new URI(url));
-
-        }catch (URISyntaxException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-    public ResponseOptions<Response> GetOpsQueryParamsAndToken(String url, String queryParams, String token){
-        try{
-            Request.header(new Header("Authorization", "Bearer "+ token));
-            Request.queryParam(queryParams);
-            return Request.get(new URI(url));
-
-        }catch (URISyntaxException e){
-            e.printStackTrace();
-        }
-        return null;
+    /**
+     * Execute API with query params being passed as the input of it
+     * @param queryPath
+     * @return Response
+     */
+    public ResponseOptions<Response> ExecuteWithQueryParams(Map<String,String> queryPath){
+        builder.addQueryParams(queryPath);
+        return ExecuteAPI();
     }
 
-
-    public static ResponseOptions<Response> PostOpsWithBodyAndPathParams(String url, Map<String, String> pathParams, Map<String, String> body) throws URISyntaxException {
-        Request.pathParams(pathParams);
-        Request.body(body);
-        return Request.post(url);
-    }
-    public static ResponseOptions<Response> PostOpsWithBodyAndPathParamsAndToken(String url, Map<String, String> pathParams, Map<String, String> body,String token) throws URISyntaxException {
-        Request.header(new Header("Authorization", "Bearer "+ token));
-        Request.pathParams(pathParams);
-        Request.body(body);
-        return Request.post(url);
+    /**
+     * ExecuteWithPathParams
+     * @param pathParams
+     * @return
+     */
+    public ResponseOptions<Response> ExecuteWithPathParams(Map<String,String> pathParams){
+        builder.addPathParams(pathParams);
+        return ExecuteAPI();
     }
 
-
-    public static ResponseOptions<Response> PostOpsWithBody(String url, Map<String,String> body){
-        Request.body(body);
-        return Request.post(url);
+    /**
+     * ExecuteWithPathParamsAndBody
+     * @param pathParams
+     * @param body
+     * @return
+     */
+    public ResponseOptions<Response> ExecuteWithPathParamsAndBody(Map<String,String> pathParams, Map<String,String> body){
+        builder.setBody(body);
+        builder.addPathParams(pathParams);
+        return ExecuteAPI();
     }
-    public static ResponseOptions<Response> PostOpsWithBodyAndToken(String url, Map<String,String> body,String token){
-        Request.header(new Header("Authorization", "Bearer "+ token));
-        Request.body(body);
-        return Request.post(url);
+
+    public ResponseOptions<Response> ExecuteWithBody(Object body){
+        builder.setBody(body);
+        return ExecuteAPI();
     }
 
 
-    public static ResponseOptions<Response> DeleteOpsWithPathParams(String url, Map<String, String>pathParams){
-        Request.pathParams(pathParams);
-        return Request.delete(url);
-    }
-    public static ResponseOptions<Response> DeleteOpsWithPathParamsAndToken(String url, Map<String, String>pathParams, String token){
-        Request.header(new Header("Authorization", "Bearer "+ token));
-        Request.pathParams(pathParams);
-        return Request.delete(url);
+    public ResponseOptions<Response> ExecuteWithoutBody(){
+        return ExecuteAPI();
     }
 
-    public static ResponseOptions<Response> GetWithPathParams(String url, Map<String, String> pathParams){
-        Request.pathParams(pathParams);
-        return Request.get(url);
+    public ResponseOptions<Response> PutWithBodyAndQueryParam(Object body,Map<String,String> pathParams){
+        builder.addPathParams(pathParams);
+        builder.setBody(body);
+        return ExecuteAPI();
     }
-    public static ResponseOptions<Response> GetWithPathParamsAndToken(String url, Map<String, String> pathParams, String token){
-        Request.header(new Header("Authorization", "Bearer "+ token));
-        Request.pathParams(pathParams);
-        return Request.get(url);
-    }
-
 
 
 
 }
-

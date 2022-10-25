@@ -1,9 +1,10 @@
 package pom.pages;
 
+import pom.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pom.BasePage;
+
 
 public class PrincipalPage extends BasePage {
 
@@ -28,7 +29,9 @@ public class PrincipalPage extends BasePage {
             return isDisplayed(titlePrincipalLocator);
         }
 
-        public void goToPrincipalPage(){
+
+
+    public void goToPrincipalPage(){
             getDriver().get(environment().urlPantallaPrincipal());
         }
 

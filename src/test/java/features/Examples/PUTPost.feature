@@ -1,5 +1,5 @@
-Feature: PUTPost
-    Verify put post operation
+@ApiRest
+Feature: PUT Post
 
 
   Background:
@@ -20,3 +20,13 @@ Feature: PUTPost
     |postid|
     |6     |
     Then I "should" see the body with title as "API Testing course"
+
+  @rest
+  Scenario: delete for reset set test
+    Given I  Perform DELETE operation  for "/posts/{postid}/"
+      |postid|
+      |6     |
+    And I perform GET operation with path parameter for "/posts/{postid}/"
+      |postid|
+      |6     |
+    Then I "should not" see the body with title as "API Testing course"
