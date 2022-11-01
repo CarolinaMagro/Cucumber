@@ -43,6 +43,7 @@ public class MongoDBHelper extends BaseDB {
             LOGGER.log(Level.SEVERE, e.getMessage());
             mongoClient.close();
         }
+
     }
 
     /**

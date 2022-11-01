@@ -12,10 +12,6 @@ import glue.RestAssuredExtension;
 import glue.TestBase;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseOptions;
-import pojo.Examples.Address;
-import pojo.Examples.Location;
-import pojo.Examples.LoginBody;
-import pojo.Examples.Posts;
 
 import java.util.HashMap;
 import java.util.List;
