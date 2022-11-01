@@ -4,13 +4,13 @@ import org.aeonbits.owner.ConfigFactory;
 
 public class BaseDB {
 
-    private static ConfigProperties configuration;
+    private static MongoConfigProperties configuration;
 
     public BaseDB(){
-        configuration = ConfigFactory.create(ConfigProperties.class);
+        configuration = ConfigFactory.create(MongoConfigProperties.class);
     }
 
-    public static ConfigProperties configuration(){
+    public static MongoConfigProperties configuration(){
         return configuration;
     }
 

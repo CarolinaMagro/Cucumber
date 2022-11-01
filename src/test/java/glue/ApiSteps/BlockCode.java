@@ -40,7 +40,6 @@ public class BlockCode extends TestBase {
 
 
         response = restAssuredExtension.ExecuteWithBody(body);
-        String asdf= "asdfa";
 
 
     }
@@ -49,7 +48,7 @@ public class BlockCode extends TestBase {
 
     @Then("^I should see the blockCode as \"([^\"]*)\"$")
     public void iShouldSeeTheBlockCodeAs(String codigo) throws Throwable {
-    //    assertThat(response.getBody().jsonPath().get("blockCode"),equalTo(codigo));
+        assertThat(response.getBody().jsonPath().get("blockCode"),equalTo(codigo));
 
 
     }

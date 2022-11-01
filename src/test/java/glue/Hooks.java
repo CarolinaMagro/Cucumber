@@ -24,7 +24,7 @@ public class Hooks {
     private DriverManager driverManager;
 
 
-    @Before("@browser")
+    @Before("@browser, @Dummy")
     public void setUp()  {
         driverManager = DriverManagerFactory.getManager(System.getProperty("browser"));
         driver = driverManager.getDriver();
@@ -32,20 +32,20 @@ public class Hooks {
         driver.manage().window().maximize();
     }
 
-    @Before("@backend")
+    @Before("@backend, @Dummy")
     public void connectToMongoServer() throws IOException {
         new MongoDBHelper();
         MongoDBHelper.connectToServer();
     }
 
-    @Before("@rest")
+    @Before("@rest, @Dummy")
     public void RestSetUp() throws IOException {
         RestAssuredExtension restAssuredExtension = new RestAssuredExtension();
 
     }
 
 
-    @After("@browser")
+    @After("@browser, @Dummy")
     public void tearDown(Scenario scenario) {
         if(scenario.isFailed()){
             byte[] screenshot= ((TakesScreenshot)driverManager.getDriver()).getScreenshotAs(OutputType.BYTES);

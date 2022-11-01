@@ -79,8 +79,6 @@ public class CambioDeNimPage extends BasePage {
                 WebElement optionCombo=getElementLocatorByText(option);
                 click(comboNuevoNumeroLinea);
                 Thread.sleep(3000);//WebElement optionCombo =getDriver().findElement(By.xpath("//*[text()[contains(.,'"+option+"')]]"));
-                click(optionCombo);
-                Thread.sleep(3000);//WebElement optionCombo =getDriver().findElement(By.xpath("//*[text()[contains(.,'"+option+"')]]"));
 
         }
 

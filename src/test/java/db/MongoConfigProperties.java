@@ -6,7 +6,7 @@ import org.aeonbits.owner.Config;
         "classpath:config.properties"
 
 })
-public interface ConfigProperties extends Config {
+public interface MongoConfigProperties extends Config {
 
    String mongo_database_user();
 
