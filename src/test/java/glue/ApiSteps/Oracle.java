@@ -13,13 +13,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import static db.DbConfig.InactiveCelsDao.*;
+
 
 public class Oracle {
 
     @Given("^Ingreso a la DB$")
     public void ingresoALaDB() throws Throwable {
 
-        Class.forName("oracle.jdbc.OracleDriver");
+        /*Class.forName("oracle.jdbc.OracleDriver");
 
 
         String url="jdbc:oracle:thin:@bengolea.claro.amx:1521:ARDPROD";
@@ -36,9 +38,12 @@ public class Oracle {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM cel_inactive_features");
         conn.close();
-        System.out.println(resultSet.toString());
+        System.out.println(resultSet.toString());*/
 
+        findInactiveCel("0000002841");
 
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+        queryTest();
     }
 
     @Then("^deberia ver$")
