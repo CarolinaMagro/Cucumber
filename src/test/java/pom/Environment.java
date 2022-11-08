@@ -20,12 +20,10 @@ public interface Environment extends Config {
     String titlePage();
 
 
-   String mongo_database_user();
-   String mongo_database_admin();
-   String mongo_database_host();
-   int mongo_database_port();
-
    String user_claro();
 
+    String db_url();
+    String db_user();
+    String db_pass();
 
 }

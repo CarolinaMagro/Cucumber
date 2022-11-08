@@ -2,18 +2,8 @@ package glue.ApiSteps;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.Driver;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Properties;
-
-import static db.DbConfig.InactiveCelsDao.*;
+import static db.Dao.InactiveCelsDao.*;
 
 
 public class Oracle {
@@ -42,8 +32,8 @@ public class Oracle {
 
         findInactiveCel("0000002841");
 
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
-        queryTest();
+        //System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+        //queryTest();
     }
 
     @Then("^deberia ver$")

@@ -4,7 +4,7 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
-import db.MongoDBHelper;
+import db.HibernateUtil;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -32,18 +32,15 @@ public class Hooks {
         driver.manage().window().maximize();
     }
 
-    @Before("@backend, @Dummy")
-    public void connectToMongoServer() throws IOException {
-        new MongoDBHelper();
-        MongoDBHelper.connectToServer();
-    }
-
     @Before("@rest, @Dummy")
     public void RestSetUp() throws IOException {
         RestAssuredExtension restAssuredExtension = new RestAssuredExtension();
-
     }
 
+    @Before("@Oracle, @Dummy")
+    public void HibernateSetUp() throws IOException {
+        HibernateUtil hibernateUtil = new HibernateUtil();
+    }
 
     @After("@browser, @Dummy")
     public void tearDown(Scenario scenario) {
@@ -57,6 +54,4 @@ public class Hooks {
     public static WebDriver getDriver(){
         return driver;
     }
-
-
 }
