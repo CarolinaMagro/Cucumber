@@ -8,7 +8,9 @@ import org.aeonbits.owner.Config;
 })
 public interface Environment extends Config {
 
-    String urlIamLitleTester();
+    String user_login();
+
+    String pass_login();
 
     String urlPantallaPrincipal();
     String urlCambioNim();
@@ -20,7 +22,6 @@ public interface Environment extends Config {
     String titlePage();
 
 
-   String user_claro();
 
     String db_url();
     String db_user();
