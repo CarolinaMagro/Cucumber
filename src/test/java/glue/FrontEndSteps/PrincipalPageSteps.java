@@ -7,7 +7,7 @@ import cucumber.api.java.en.When;
 import glue.TestBase;
 import org.junit.Assert;
 
-public class PrincipalPageTest extends TestBase {
+public class PrincipalPageSteps extends TestBase {
 
 
     @Given("^El usuario se encuentra en la pantalla principal$")

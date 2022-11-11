@@ -6,12 +6,13 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.lexer.Th;
 import glue.TestBase;
 import org.junit.Assert;
 
 import java.util.List;
 
-public class CambioDeNimPageTest extends TestBase {
+public class CambioDeNimPageSteps extends TestBase {
 
     @Given("^El usuario se encuentra en la pantalla Cambio de Nim$")
     public void elUsuarioSeEncuentraEnLaPantallaCambioDeNim() throws Throwable {
@@ -21,22 +22,7 @@ public class CambioDeNimPageTest extends TestBase {
 
     }
 
-    @When("^Se completan los campos$")
-    public void seCompletanLosCampos(DataTable table) throws Throwable {
-        List<List<String>> data = table.raw();
-        //setea Campos
 
-        //Thread.sleep(500);
-        //cambioDeNimPage.setInputNumeroActual(data.get(1).get(0));
-        Thread.sleep(500);
-        cambioDeNimPage.setInputCodigoArea(data.get(1).get(1));
-        //Thread.sleep(500);
-        //cambioDeNimPage.setInputBloque(data.get(1).get(2));
-        Thread.sleep(500);
-        cambioDeNimPage.selectOptionCombo(data.get(1).get(3));
-        Thread.sleep(500);
-
-    }
 
     @And("^Se hace click en el boton guardar nim$")
     public void seHaceClickEnElBotonGuardarNim() throws Throwable{
@@ -48,5 +34,19 @@ public class CambioDeNimPageTest extends TestBase {
     public void seDebeVisualizarElMensajeDeConfirmacion() throws Throwable {
         Assert.assertTrue("No se visualizo el msj de confirmacion", cambioDeNimPage.isMsjConfirmacionDisplayed());
     }
+
+    @When("^Se setea el codigo de area con el numero (\\d+)$")
+    public void seSeteaElCodigoDeAreaConElNumero(String codigoArea) throws Throwable {
+        cambioDeNimPage.setInputCodigoArea(codigoArea);
+        Thread.sleep(1000);
+    }
+
+
+
+    @Then("^Se debe actualizar el bloque con el numero A(\\d+)$")
+    public void seDebeActualizarElBloqueConElNumeroA(String bloque) throws Throwable {
+        Assert.assertTrue(cambioDeNimPage.getBloque().equalsIgnoreCase(bloque));
+    }
+
 
 }

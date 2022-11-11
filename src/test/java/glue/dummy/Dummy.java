@@ -15,7 +15,6 @@ public class Dummy extends TestBase {
     @Given("^quiero hacer un test$")
     public void quieroHacerUnTest() throws Throwable {
 
-
     }
 
     @When("^asdfasd$")

@@ -107,4 +107,9 @@ public class CambioDeNimPage extends BasePage {
                 return getText(inputNuevoNumeroLinea).equalsIgnoreCase("asdf")&& getTitle().equalsIgnoreCase("asdfasdf");
         }
 
+
+        public String getBloque() throws Exception {
+              return getText(inputBloque);
+        }
+
     }

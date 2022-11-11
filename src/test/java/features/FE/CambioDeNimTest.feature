@@ -2,15 +2,20 @@
 Feature: Cambio de Nim
   Como QA automation quiero ingresar a la pantalla Cambio de Nim para testear su correcto funcionamiento
 
+
+  Background:
+    Given   El usuario se encuentra en la pantalla Login
+    And    setea credenciales e ingresa a la app
+    And    Se debe dirigir a la pantalla con titulo "PGL"
+
   @browser
-  Scenario: Ingresar a cambio de Nim
+  Scenario Outline:  Ingresar a cambio de Nim
     Given   El usuario se encuentra en la pantalla Cambio de Nim
-    When    Se completan los campos
-      | numeroActual | codArea | bloque  | nuevoNumero |
-      |  3512598560  |   011   |  A1234 | 15-6504-6985|
+    When    Se setea el codigo de area con el numero <codArea>
+    Then    Se debe actualizar el bloque con el numero <bloque>
 
-    And Se hace click en el boton guardar nim
-    Then Se debe visualizar el mensaje de confirmacion
-
+    Examples:
+      | codArea | bloque |
+      |   011   |  A1234 |
 
 
