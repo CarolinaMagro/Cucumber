@@ -11,42 +11,58 @@ public class CambioDeNimPage extends BasePage {
         private String titlePage=environment().titlePage();
 
 
-        @FindBy(xpath = "//*[contains(text(), 'Asignar Nuevo NIM')]")
+        @FindBy(id="title-assign_nim")
         private WebElement titleCambioDeNimLocator;
 
-        @FindBy(xpath = "//*[@id=\"root\"]/div[2]/div[2]/div/div[3]/div/form/div[3]/button")
+        @FindBy(id = "button-save_nim")
         private WebElement btnGuardarNim;
 
-        @FindBy(xpath = "//*[@id=\"root\"]/div[2]/div[2]/div/div[3]/div/form/div[1]/div[1]/input")
+        @FindBy(id = "input-current_number")
         private WebElement inputNumeroActual;
 
-        @FindBy(xpath = "//*[@id=\"root\"]/div[2]/div[2]/div/div[3]/div/form/div[1]/div[2]/input")
+        @FindBy(id = "input-area_code")
         private WebElement inputCodigoArea;
 
-        @FindBy(xpath = "//*[@id=\"root\"]/div[2]/div[2]/div/div[3]/div/form/div[1]/div[3]/input")
+        @FindBy(id = "input-block_code")
         private WebElement inputBloque;
 
-        @FindBy(xpath = "//*[@id=\"root\"]/div[2]/div[2]/div/div[3]/div/form/div[2]/div[1]/div[1]/input")
+        @FindBy(id = "checkbox-special_number")
         private WebElement checkBoxNroEspecial;
 
-        @FindBy(xpath = "//*[@id=\"root\"]/div[2]/div[2]/div/div[3]/div/form/div[2]/div[1]/div[1]/input")
+        @FindBy(id = "dropwdown-special_number")
         private WebElement comboNuevoNumeroLinea;
 
-        @FindBy(xpath = "//*[@id=\"root\"]/div[2]/div[2]/div/div[3]/div/form/div[2]/div[2]/input")
+        @FindBy(id = "input-new_number")
         private WebElement inputNuevoNumeroLinea;
 
-        @FindBy(xpath = "/html/body/div/div[2]/div[2]/div/div[4]/div/form/div[1]/div[1]/input\n")
+        @FindBy(id = "input-previous_number")
         private WebElement inputNumeroAnterior;
 
-        @FindBy(xpath = "//*[@id=\"root\"]/div[2]/div[2]/div/div[4]/div/form/div[1]/div[2]/input")
+        @FindBy(id = "input-change_date")
         private WebElement inputFecha;
 
-        @FindBy(xpath = "//*[@id=\"root\"]/div[2]/div[2]/div/div[4]/div/form/div[2]/button")
+        @FindBy(id = "button-save_undonim")
         private WebElement btnDeshacerNim;
 
         @FindBy(id = "mensaje-de-confirmacion")
         private WebElement msjConfirmacion;
 
+
+
+        @FindBy(id = "title-assign_nim")
+        private WebElement titleAssingDeNim;
+        @FindBy(id = "title-undo_nim")
+        private WebElement titleUndoNim;
+
+        @FindBy(id = "input-special_number")
+        private WebElement inputNroEspecial;
+
+        @FindBy(id = "")
+        private WebElement dropdownNuevoNumeroLinea;
+        @FindBy(id ="input-billing_number")
+        private WebElement inputBillingNumber;
+        @FindBy(id ="button-search")
+        private WebElement buttonSearch;
 
 
 
@@ -112,4 +128,34 @@ public class CambioDeNimPage extends BasePage {
               return getText(inputBloque);
         }
 
-    }
+
+
+
+
+
+        public String getInputBloque() throws Exception {
+
+                return inputBloque.getText();
+        }
+
+
+
+
+
+
+
+        public boolean isTitleUndoCambioDeNimDisplayed() throws Exception {
+                return isDisplayed(titleUndoNim);
+        }
+
+        public void setInputBillingNumber(String text) throws Exception {
+                clearField(inputBillingNumber);
+                setText(inputBillingNumber, text);
+        }
+        public void clickOnButtonSearch() throws Exception {
+                this.click(buttonSearch);
+        }
+
+
+
+}

@@ -12,6 +12,7 @@ import runner.browser_manager.DriverManager;
 import runner.browser_manager.DriverManagerFactory;
 import utils.LogHelper;
 
+
 import java.io.IOException;
 
 import java.util.logging.Logger;
@@ -30,6 +31,7 @@ public class Hooks {
         driver = driverManager.getDriver();
         driver.get("about:blank");
         driver.manage().window().maximize();
+
     }
 
     @Before("@rest, @Dummy")

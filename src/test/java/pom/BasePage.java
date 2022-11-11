@@ -120,7 +120,7 @@ public class BasePage {
 
 
 
-    public String getTitle()throws Exception{
+    public String getTitle() throws Exception {
         try {
             return driver.getTitle();
         }catch (Exception e){

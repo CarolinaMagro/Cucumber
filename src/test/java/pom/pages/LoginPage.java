@@ -45,9 +45,8 @@ public class LoginPage extends BasePage {
                 click(btnIngresar);
         }
 
-
-        public boolean isOnLoginPage() throws Exception {
-                return getTitle().contains("Iniciar sesión en Claro");
+        public boolean isInLogginPage() throws Exception {
+               return getTitle().equalsIgnoreCase("Iniciar sesión en Claro");
         }
 
         public void goToLoginPage(){
