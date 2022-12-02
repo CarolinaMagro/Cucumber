@@ -1,5 +1,6 @@
 package pom.pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -79,8 +80,13 @@ public class CambioDeNimPage extends BasePage {
             setText(inputNumeroActual, text);
         }
 
+        public String getNumeroActual() throws Exception {
+             return getValue(inputNumeroActual);
+        }
+
         public void setInputCodigoArea(String text) throws Exception {
                 clearField(inputCodigoArea);
+                Thread.sleep(300);
                 setText(inputCodigoArea, text);
         }
 
@@ -95,16 +101,18 @@ public class CambioDeNimPage extends BasePage {
                 WebElement optionCombo=getElementLocatorByText(option);
                 click(comboNuevoNumeroLinea);
                 Thread.sleep(3000);//WebElement optionCombo =getDriver().findElement(By.xpath("//*[text()[contains(.,'"+option+"')]]"));
-
         }
 
 
         public void clickOnGuardarNim() throws Exception {
-            this.click(btnGuardarNim);
+                this.click(btnGuardarNim);
+                float time = 0;
+                while (!getText(btnGuardarNim).equalsIgnoreCase("Guardar") && time < 10) {
+                        Thread.sleep(250);
+                        time += 0.25;
+                }
 
         }
-
-
 
         public boolean cambioDeNimPageIsDisplayed() throws Exception {
             return isDisplayed(titleCambioDeNimLocator);
@@ -125,19 +133,13 @@ public class CambioDeNimPage extends BasePage {
 
 
         public String getBloque() throws Exception {
-              return getText(inputBloque);
+              return getValue(inputBloque);
         }
 
 
-
-
-
-
-        public String getInputBloque() throws Exception {
-
-                return inputBloque.getText();
+        public String getCodArea() throws Exception {
+                return getValue(inputCodigoArea);
         }
-
 
 
 
@@ -152,10 +154,32 @@ public class CambioDeNimPage extends BasePage {
                 clearField(inputBillingNumber);
                 setText(inputBillingNumber, text);
         }
+
+        public String getBillingNumber() throws Exception {
+                return  getValue(inputBillingNumber);
+        }
+
+        public String getNumeroEspecial() throws Exception {
+                return  getValue(inputNroEspecial);
+        }
+
         public void clickOnButtonSearch() throws Exception {
                 this.click(buttonSearch);
         }
 
+        public String getNuevoNumeroLinea() throws Exception {
+                return getValue(inputNuevoNumeroLinea);
+        }
+
+
+        public String getInputBloque() throws Exception {
+                return getValue(inputBloque);
+        }
+
+
+        public void clickOnCheckSpecialNumber() throws Exception{
+                this.click(checkBoxNroEspecial);
+        }
 
 
 }

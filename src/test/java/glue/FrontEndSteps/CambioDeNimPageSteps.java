@@ -2,12 +2,15 @@ package glue.FrontEndSteps;
 
 
 
+
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import glue.TestBase;
+import org.junit.Assert;
 
 import java.util.List;
 
@@ -15,6 +18,10 @@ import static junit.framework.TestCase.*;
 
 
 public class CambioDeNimPageSteps extends TestBase {
+
+    String nuevoNumeroLinea;
+
+
 
 
     @When("^Se setea el codigo de area con el numero (\\d+)$")
@@ -61,7 +68,6 @@ public class CambioDeNimPageSteps extends TestBase {
     @And("^Se hace click en el boton guardar nim$")
     public void seHaceClickEnElBotonGuardarNim() throws Throwable{
         cambioDeNimPage.clickOnGuardarNim();
-        Thread.sleep(2000);
     }
 
     @Then("^Se debe visualizar el mensaje de confirmacion$")

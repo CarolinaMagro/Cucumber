@@ -5,14 +5,13 @@ import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
 
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import utils.LogHelper;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
+
 
 
 @RunWith(Cucumber.class)

@@ -13,7 +13,7 @@ public class PrincipalPage extends BasePage {
         @FindBy(xpath = "//*[contains(text(), 'PGN')]")
         private WebElement titlePrincipalLocator;
 
-        @FindBy(xpath = "//*[contains(text(), 'Cambio de NIM')]")
+        @FindBy(xpath = "//*[contains(text(), 'Cambio de Número')]")
         private WebElement btnCambioDeNim;
 
 

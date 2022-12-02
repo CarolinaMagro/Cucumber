@@ -141,5 +141,13 @@ public class BasePage {
     }
 
 
+    public String getValue(WebElement element) throws Exception {
+        try {
+            return element.getAttribute("value");
+        } catch (Exception e) {
+            throw new Exception("Could not get the text of the following element: " + element);
+        }
+    }
+
 
 }

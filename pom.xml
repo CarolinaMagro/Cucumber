@@ -24,12 +24,22 @@
 
 
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.0.0</version>
+      <scope>test</scope>
+    </dependency>
+
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
+
 
 
     <dependency>
@@ -57,6 +67,9 @@
       <version>1.2.6</version>
       <scope>test</scope>
     </dependency>
+
+
+
 
     <dependency>
       <groupId>com.vimalselvam</groupId>

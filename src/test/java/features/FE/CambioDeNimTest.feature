@@ -7,9 +7,21 @@ Feature: Cambio de Nim
     Given   El usuario se encuentra en la pantalla Login
     And    setea credenciales e ingresa a la app
     And    Se debe dirigir a la pantalla con titulo "PGL"
+    And  El usuario se encuentra en la pantalla Cambio de Nim
+
+  #@browser
+  Scenario: Hacer un cambio de numero con numero generado
+    Given  Se ingresa el billing number "3512078606"
+    When  Se setea el codigo de area con el numero "11"
+    And   Se obtiene el nuevo numero de linea
+    And  Se hace click en el boton guardar nim
+    Then  Se deben resetear los campos codArea y bloque
+    And  Se debe actualizar numero actual y billing number con nuevo numero de linea obtenido
+
+
 
 #Seba
-  @browser
+  #@browser
   Scenario Outline:  Ingresar a cambio de Nim
     Given   El usuario se encuentra en la pantalla Cambio de Nim
     When    Se setea el codigo de area con el numero <codArea>
@@ -18,15 +30,12 @@ Feature: Cambio de Nim
     Examples:
       | codArea | bloque |
       |   011   |  A1234 |
-      |   348   |  asdf |
-      |   2322  | jfgf  |
-      |   345   |  a345  |
-      |  654    |  A654  |
+
 
 
 
 #Caro
-  @browser
+  #@browser
   Scenario Outline: Ingresar a cambio de Nim
     Given   El usuario se encuentra en la pantalla Cambio de Nim
     When    Se completa el <codigoDeArea>
@@ -37,7 +46,7 @@ Feature: Cambio de Nim
       | codigoDeArea |
       |   011        |
 
-  @browser
+  #@browser
   Scenario Outline: Corroborar el bloque generado
     Given   El usuario se encuentra en la pantalla Cambio de Nim
     When    Se utiliza el <numero>
