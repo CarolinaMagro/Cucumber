@@ -2,12 +2,15 @@
 package glue.FrontEndSteps;
 
 
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+
 import glue.TestBase;
 import org.junit.Assert;
 
+import static junit.framework.TestCase.assertTrue;
 
 
 public class CambioDeNimPageSebaSteps extends TestBase {
@@ -23,18 +26,18 @@ public class CambioDeNimPageSebaSteps extends TestBase {
 
     @And("^Se setea el codigo de area con \"([^\"]*)\"$")
     public void seSeteaElCodigoDeAreaConElNumero(String codArea) throws Throwable {
-        System.out.println("Debo setear el codigo de area");
         cambioDeNimPage.setInputCodigoArea(codArea);
-        System.out.println("He seteado el codigo de area");
-    }
-
-    @And("^Se obtiene el nuevo numero de linea$")
-    public void seObtieneElNuevoNumeroDeLinea() throws Exception {
         float time = 0;
         while (cambioDeNimPage.getNuevoNumeroLinea().isEmpty() && time < 10) {
             Thread.sleep(250);
             time += 0.25;
         }
+    }
+
+    @And("^Se obtiene el nuevo numero de linea$")
+    public void seObtieneElNuevoNumeroDeLinea() throws Exception {
+        this.nuevoNumeroLinea = null;
+
         if (!cambioDeNimPage.getNuevoNumeroLinea().isEmpty()){
             Thread.sleep(500);
             this.nuevoNumeroLinea = cambioDeNimPage.getNuevoNumeroLinea();
@@ -120,12 +123,13 @@ public class CambioDeNimPageSebaSteps extends TestBase {
     @And("^Se habilita el check especial$")
     public void seHabilitaElCheckEspecial() throws Exception {
         cambioDeNimPage.clickOnCheckSpecialNumber();
+        Thread.sleep(300);
     }
 
 
     @And("^Se obtiene el nuevo numero de linea especial$")
     public void seObtieneElNuevoNumeroDeLineaEspecial() throws Exception {
-
+        this.nuevoNumeroLinea=null;
         float time = 0;
         while (cambioDeNimPage.getNumeroEspecial().isEmpty() && time < 10) {
             Thread.sleep(250);
@@ -135,8 +139,39 @@ public class CambioDeNimPageSebaSteps extends TestBase {
             Thread.sleep(500);
             this.nuevoNumeroLinea = cambioDeNimPage.getNumeroEspecial();
         }else{
-            System.out.println("No se pudo obtener el nuevo numero de linea");
+            Assert.assertTrue("No se pudo obtener el nuevo numero de linea",false);
         }
+
+    }
+
+
+    @And("^Se setea un numero especial \"([^\"]*)\"$")
+    public void seSeteaUnNumeroEspecial(String numeroEspecial) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        this.nuevoNumeroLinea=null;
+
+        cambioDeNimPage.setNumeroEspecial(numeroEspecial);
+
+        Thread.sleep(1000);
+
+        if (!cambioDeNimPage.getNumeroEspecial().isEmpty()){
+            Thread.sleep(500);
+            this.nuevoNumeroLinea = numeroEspecial;
+        }else{
+            Assert.assertTrue(false);
+        }
+    }
+
+    @Then("^Se debe visualizar el mensaje de error$")
+    public void seDebeVisualizarElMensajeDeError() throws Exception {
+        Thread.sleep(4000);
+        assertTrue("Expected: Error, But found: "+cambioDeNimPage.catch_messages() , cambioDeNimPage.catch_messages().contains("Error"));
+    }
+
+
+    @And("^El campo bloque debe actualizarse con el numero \"([^\"]*)\"$")
+    public void elCampoBloqueDebeActualizarseConElNumero(String bloque) throws Throwable {
+        Assert.assertTrue("No se actualizo el bloque",cambioDeNimPage.getBloque().equals(bloque));
 
     }
 }

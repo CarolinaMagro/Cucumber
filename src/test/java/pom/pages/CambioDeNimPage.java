@@ -7,6 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pom.BasePage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class CambioDeNimPage extends BasePage {
 
         private String titlePage=environment().titlePage();
@@ -47,7 +51,6 @@ public class CambioDeNimPage extends BasePage {
 
         @FindBy(id = "mensaje-de-confirmacion")
         private WebElement msjConfirmacion;
-
 
 
         @FindBy(id = "title-assign_nim")
@@ -131,6 +134,18 @@ public class CambioDeNimPage extends BasePage {
                 return getText(inputNuevoNumeroLinea).equalsIgnoreCase("asdf")&& getTitle().equalsIgnoreCase("asdfasdf");
         }
 
+        public ArrayList<String> catch_messages() throws Exception {
+                List<WebElement> messages= getDriver().findElements(By.xpath("//*[@id='root']/div[1]/div"));
+                ArrayList<String> mensajes_texto= new ArrayList<String>();
+
+                for (int i = 1; i < messages.size()+1; i++){
+                        String element1 = getText(getDriver().findElement(By.xpath("//*[@id='root']/div[1]/div["+i+"]/div[1]/p")));
+                        String element2 = getText(getDriver().findElement(By.xpath("//*[@id='root']/div[1]/div["+i+"]/div[2]/p")));
+                        mensajes_texto.add(" "+element1 +" "+ element2);
+                }
+                return mensajes_texto;
+        }
+
 
         public String getBloque() throws Exception {
               return getValue(inputBloque);
@@ -154,6 +169,13 @@ public class CambioDeNimPage extends BasePage {
                 clearField(inputBillingNumber);
                 setText(inputBillingNumber, text);
         }
+
+        public void setNumeroEspecial(String text) throws Exception {
+                clearField(inputNroEspecial);
+                setText(inputNroEspecial, text);
+        }
+
+
 
         public String getBillingNumber() throws Exception {
                 return  getValue(inputBillingNumber);
@@ -180,6 +202,8 @@ public class CambioDeNimPage extends BasePage {
         public void clickOnCheckSpecialNumber() throws Exception{
                 this.click(checkBoxNroEspecial);
         }
+
+
 
 
 }

@@ -12,11 +12,12 @@ Feature: Cambio de Nim
   #@browser
   Scenario: Hacer un cambio de numero con numero generado
     Given  Se ingresa el billing number "3512078606"
-    When  Se setea el codigo de area con el numero "11"
-    And   Se obtiene el nuevo numero de linea
-    And  Se hace click en el boton guardar nim
-    Then  Se deben resetear los campos codArea y bloque
-    And  Se debe actualizar numero actual y billing number con nuevo numero de linea obtenido
+    When   Se setea el codigo de area con "11"
+    And    El campo bloque debe actualizarse con el numero "AC001"
+    And    Se obtiene el nuevo numero de linea
+    And    Se hace click en el boton guardar nim
+    Then   Se deben resetear los campos codArea y bloque
+    And    Se debe actualizar numero actual y billing number con nuevo numero de linea obtenido
 
 
 
