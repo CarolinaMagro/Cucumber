@@ -146,9 +146,9 @@ Feature: Cambio de Nim
       |  3516858230  |	3835	  |	L0100	   |	CORDOBA	                        |
       |  3516858230  |	351	      |	N0100	   |	CORDOBA	                        |
       |  3516858230  |	358	      |	N0800	   |	RIO CUARTO	                    |
-      |  3516858230  |	2982	  |	S2990	   |	CLAROMECO
+      |  3516858230  |	2982	  |	S2990	   |	CLAROMECO                       |
 
-  @browser
+  #@browser
   Scenario Outline: TC_009_Completar_campos_requeridos_para_hacer_NIM
     Given    Se busca el billing number "<numero>"
     When     Se hace click en el boton guardar nim
@@ -156,3 +156,5 @@ Feature: Cambio de Nim
     Examples:
       |  numero      | mensaje_esperado   |
       |  3516858230  | aqui va el mensaje |
+
+
