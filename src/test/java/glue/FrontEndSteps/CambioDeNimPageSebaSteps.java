@@ -167,6 +167,11 @@ public class CambioDeNimPageSebaSteps extends TestBase {
         Thread.sleep(4000);
         assertTrue("Expected: Error, But found: "+cambioDeNimPage.catch_messages() , cambioDeNimPage.catch_messages().contains("Error"));
     }
+    @Then("^Se verifica el mensaje esperado \"([^\"]*)\"$")
+    public void seVerificaSegunElnumeroElMensaje(String mensaje_esperado) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        assertTrue(cambioDeNimPage.ValidateCompanyRules(mensaje_esperado));
+    }
 
 
     @And("^El campo bloque debe actualizarse con el numero \"([^\"]*)\"$")

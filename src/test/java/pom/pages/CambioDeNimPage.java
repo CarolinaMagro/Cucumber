@@ -203,7 +203,22 @@ public class CambioDeNimPage extends BasePage {
                 this.click(checkBoxNroEspecial);
         }
 
-
+        public Boolean ValidateCompanyRules(String mensaje_esperado) throws Exception {
+                ArrayList<String> messages = this.catch_messages();
+                try{
+                        for (int i = 0; i < messages.size(); i++) {
+                                if (messages.get(i).contains(mensaje_esperado)){
+                                        String mensaje_actual= messages.get(i);
+                                        return true;
+                                }
+                        }
+                        return false;
+                }
+                catch (Exception e ){
+                        System.out.println(e.getMessage());
+                        return false;
+                }
+        }
 
 
 }
