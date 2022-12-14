@@ -167,6 +167,7 @@ public class CambioDeNimPageSebaSteps extends TestBase {
         Thread.sleep(4000);
         assertTrue("Expected: Error, But found: "+cambioDeNimPage.catch_messages() , cambioDeNimPage.catch_messages().contains("Error"));
     }
+
     @Then("^Se verifica el mensaje esperado \"([^\"]*)\"$")
     public void seVerificaSegunElnumeroElMensaje(String mensaje_esperado) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
@@ -179,4 +180,17 @@ public class CambioDeNimPageSebaSteps extends TestBase {
         Assert.assertTrue("No se actualizo el bloque",cambioDeNimPage.getBloque().equals(bloque));
 
     }
+
+    //Caro
+    @And("^El usuario se encuentra en la pantalla Cambio de Nim$")
+    public void elUsuarioSeEncuentraEnLaPantallaCambioDeNim() {
+            cambioDeNimPage.goToCambioDeNimPage();
+            //assertTrue(cambioDeNimPage.cambioDeNimPageIsDisplayed());
+    }
+
+    @And("^Se hace click en el boton guardar nim$")
+    public void seHaceClickEnElBotonGuardarNim() throws Throwable{
+        cambioDeNimPage.clickOnGuardarNim();
+    }
+
 }
