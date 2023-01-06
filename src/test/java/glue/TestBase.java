@@ -5,8 +5,10 @@ import junit.framework.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import pom.pages.CambioDeNimPage;
+import pom.pages.LoginPage;
 import pom.pages.PrincipalPage;
 import utils.LogHelper;
+
 
 import java.util.logging.Logger;
 
@@ -15,5 +17,7 @@ public class TestBase {
     protected WebDriver driver = Hooks.getDriver();
     protected CambioDeNimPage cambioDeNimPage = PageFactory.initElements(driver, CambioDeNimPage.class);
     protected PrincipalPage principalPage = PageFactory.initElements(driver, PrincipalPage.class);
+
+    protected LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 
 }

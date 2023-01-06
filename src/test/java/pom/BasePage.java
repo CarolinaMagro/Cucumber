@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import glue.Hooks;
 import utils.LogHelper;
 
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +21,7 @@ public class BasePage {
         return driver;
     }
 
-    public Environment ambiente() {
+    public Environment environment() {
         return this.environment;
     }
 
@@ -139,6 +140,14 @@ public class BasePage {
         return element;
     }
 
+
+    public String getValue(WebElement element) throws Exception {
+        try {
+            return element.getAttribute("value");
+        } catch (Exception e) {
+            throw new Exception("Could not get the text of the following element: " + element);
+        }
+    }
 
 
 }

@@ -1,9 +1,10 @@
 package pom.pages;
 
+import pom.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pom.BasePage;
+
 
 public class PrincipalPage extends BasePage {
 
@@ -12,7 +13,7 @@ public class PrincipalPage extends BasePage {
         @FindBy(xpath = "//*[contains(text(), 'PGN')]")
         private WebElement titlePrincipalLocator;
 
-        @FindBy(xpath = "//*[contains(text(), 'Cambio de NIM')]")
+        @FindBy(xpath = "//*[contains(text(), 'Cambio de Número')]")
         private WebElement btnCambioDeNim;
 
 
@@ -28,8 +29,10 @@ public class PrincipalPage extends BasePage {
             return isDisplayed(titlePrincipalLocator);
         }
 
-        public void goToPrincipalPage(){
-            getDriver().get(ambiente().urlPantallaPrincipal());
+
+
+    public void goToPrincipalPage(){
+            getDriver().get(environment().urlPantallaPrincipal());
         }
 
     }

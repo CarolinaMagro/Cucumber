@@ -4,13 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+
   <groupId>Cucumber_Selenium</groupId>
   <artifactId>Cucumber_Selenium</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>Cucumber_Selenium</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,13 +17,30 @@
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 
+  <name>Cucumber_Selenium</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+
+
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.0.0</version>
+      <scope>test</scope>
+    </dependency>
+
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
+
+
 
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
@@ -35,7 +51,7 @@
     <dependency>
       <groupId>info.cukes</groupId>
       <artifactId>cucumber-java</artifactId>
-      <version>1.2.5</version>
+      <version>1.2.6</version>
     </dependency>
 
     <dependency>
@@ -48,9 +64,12 @@
     <dependency>
       <groupId>info.cukes</groupId>
       <artifactId>cucumber-junit</artifactId>
-      <version>1.2.5</version>
+      <version>1.2.6</version>
       <scope>test</scope>
     </dependency>
+
+
+
 
     <dependency>
       <groupId>com.vimalselvam</groupId>
@@ -78,18 +97,43 @@
       <version>5.2.0</version>
       <scope>test</scope>
     </dependency>
+
+
+    <!-- https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator -->
     <dependency>
       <groupId>io.rest-assured</groupId>
-      <artifactId>rest-assured</artifactId>
+      <artifactId>json-schema-validator</artifactId>
       <version>5.2.0</version>
-      <scope>compile</scope>
+      <scope>test</scope>
     </dependency>
+
+
+
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
     <dependency>
-      <groupId>com.github.mcpat.apistubs</groupId>
-      <artifactId>cldc-1.1-stub</artifactId>
-      <version>1.0</version>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.24</version>
+      <scope>provided</scope>
     </dependency>
-    <!-- Thanks for using https://jar-download.com -->
+
+
+
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <version>2.5.1</version>
+    </dependency>
+
+
+
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.3.7.Final</version>
+      <type>pom</type>
+    </dependency>
 
 
 

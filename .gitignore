@@ -3,3 +3,5 @@ target/
 node_modules/
 report/
 package-lock.json
+test/java/features/dummy.feature
+glue/dummy

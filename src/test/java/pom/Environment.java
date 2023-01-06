@@ -8,24 +8,19 @@ import org.aeonbits.owner.Config;
 })
 public interface Environment extends Config {
 
-    String urlIamLitleTester();
+    String user_login();
+
+    String pass_login();
 
     String urlPantallaPrincipal();
     String urlCambioNim();
 
-    String user();
-
-    String pass();
-
     String titlePage();
 
 
-   String mongo_database_user();
-   String mongo_database_admin();
-   String mongo_database_host();
-   int mongo_database_port();
 
-   String user_claro();
-
+    String db_url();
+    String db_user();
+    String db_pass();
 
 }

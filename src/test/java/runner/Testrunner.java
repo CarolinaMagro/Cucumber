@@ -3,6 +3,7 @@ package runner;
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -10,7 +11,7 @@ import utils.LogHelper;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
+
 
 
 @RunWith(Cucumber.class)
@@ -24,23 +25,25 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class Testrunner {
 
-    private static Process pr;
+
     private static final Logger LOGGER = LogHelper.getLogger(Testrunner.class);
+
 
     @BeforeClass()
     public static void setUp(){
-
+        //startLocalServer();
         LOGGER.log(Level.INFO, "Test browser execution begins...");
         LOGGER.log(Level.INFO, "Starting environment: "+System.getProperty("environment"));
-        startLocalServer();
-
         }
+
 
 
 
     @AfterClass
     public static void teardown(){
-        closeLocalServer();
+        //closeLocalServer();
+
+
         try {
             LOGGER.log(Level.INFO, "Generating report...");
             String[] cmd = {"cmd.exe", "/c", "npm run report"};
@@ -54,11 +57,16 @@ public class Testrunner {
 
 
 
+
+
     private static void startLocalServer() {
         if (System.getProperty("environment").equalsIgnoreCase("local")) {
             try {
                 String[] initAppServer = {"cmd.exe", "/c", "cd C:\\Users\\sebastian.arrejin\\post-venta-movil && npm run start"};
-                pr = Runtime.getRuntime().exec(initAppServer);
+                Runtime.getRuntime().exec(initAppServer);
+
+                String[] initJsonServer = {"cmd.exe", "/c", "cd C:\\json && npm run start-auth"};
+                Runtime.getRuntime().exec(initJsonServer);
 
                 LOGGER.log(Level.INFO, "Starting Local server... ");
                 Thread.sleep(4000);
@@ -72,7 +80,7 @@ public class Testrunner {
         if (System.getProperty("environment").equalsIgnoreCase("local")) {
             try {
                 String[] closeServer = {"cmd.exe", "/c", "taskkill /im node.exe /t /f\n"};
-                pr = Runtime.getRuntime().exec(closeServer);
+                Runtime.getRuntime().exec(closeServer);
                 LOGGER.log(Level.INFO, "Closing Local server... ");
             } catch (Exception e) {
                 LOGGER.log(Level.SEVERE, "Error closing server... ");
