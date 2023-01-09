@@ -8,7 +8,7 @@ Feature: Cambio de Nim
     And    Se debe dirigir a la pantalla con titulo "PGL"
     And    El usuario se encuentra en la pantalla Cambio de Nim
 
-  @browser
+  @TC_001_Hacer_NIM_con_numero_generado
   Scenario: TC_001_Hacer_NIM_con_numero_generado
     Given Se busca el billing number "3512072567"
     And   Se setea el codigo de area con "11"
@@ -21,7 +21,7 @@ Feature: Cambio de Nim
     Then  Se debe actualizar numero actual con nuevo numero de linea obtenido
     And   Se verifica el mensaje esperado "mensaje_esperado"
 
-  #@browser
+  @TC_002_Hacer_NIM_con_numero_especial_del_la_lista_sugerida
   Scenario: TC_002_Hacer_NIM_con_numero_especial_del_la_lista_sugerida
     Given Se busca el billing number "3512072771"
     And   Se setea el codigo de area con "11"
@@ -36,7 +36,7 @@ Feature: Cambio de Nim
     Then  Se debe actualizar numero actual con nuevo numero de linea obtenido
     And   Se verifica el mensaje esperado "mensaje_esperado"
 
-  @browser
+  @TC_003_Hacer_NIM_elegido_manualmente
   Scenario: TC_003_Hacer_NIM_elegido_manualmente
     Given Se busca el billing number "3512072771"
     And   Se setea el codigo de area con "11"
@@ -51,7 +51,7 @@ Feature: Cambio de Nim
     Then Se debe actualizar billing number con nuevo numero de linea obtenido
     Then  Se debe actualizar numero actual con nuevo numero de linea obtenido
 
-  @browser
+  @TC_004_Hacer_NIM_elegido_manualmete_no_diponible
   Scenario: TC_004_Hacer_NIM_elegido_manualmete_no_diponible
     Given Se busca el billing number "3512072771"
     And   Se setea el codigo de area con "11"
@@ -62,7 +62,7 @@ Feature: Cambio de Nim
     When  Se hace click en el boton guardar nim
     Then   Se verifica el mensaje esperado "mensaje_esperado"
 
-  @browser
+  @TC_005_Hacer_NIM_con_número_no_habilitado_por_reglas_de_negocio
   Scenario Outline: TC_005_Hacer_NIM_con_número_no_habilitado_por_reglas_de_negocio
     Given Se busca el billing number "<numero>"
     And   Se setea el codigo de area con "<codigoDeArea>"
@@ -104,7 +104,7 @@ Feature: Cambio de Nim
 
 
 
-  @browser
+  @TC_006_Deshacer_NIM_habilitado
   Scenario: TC_006_Deshacer_NIM_habilitado
     Given Se busca el billing number "<7439874329739>"
     And   Se setea el codigo de area con "11"
@@ -114,7 +114,7 @@ Feature: Cambio de Nim
     And   Se verifica el mensaje esperado "mensaje_esperado"
     #terminar
 
-  @browser
+  @TC_007_Deshacer_NIM_con_un_número_no_habilitado
   Scenario: TC_007_Deshacer_NIM_con_un_número_no_habilitado
     Given Se busca el billing number "7439874329739"
     And   Se setea el codigo de area con "11"
@@ -124,7 +124,7 @@ Feature: Cambio de Nim
     And   Se verifica el mensaje esperado "mensaje_esperado"
     #terminar
 
-  @browser
+  @TC_008_Corroborar_datos_requeridos_al_realizar_un_NIM
   Scenario Outline: TC_008_Corroborar_datos_requeridos_al_realizar_un_NIM
     Given  Se busca el billing number "<numero>"
     When   Se setea el codigo de area con "<codigoDeArea>"
@@ -176,7 +176,7 @@ Feature: Cambio de Nim
       |  3516858230  |	358	      |	N0800	   |	RIO CUARTO	                    |
       |  3516858230  |	2982	  |	S2990	   |	CLAROMECO                       |
 
-  #@browser
+  @TC_009_Completar_campos_requeridos_para_hacer_NIM
   Scenario Outline: TC_009_Completar_campos_requeridos_para_hacer_NIM
     Given    Se busca el billing number "<numero>"
     When     Se hace click en el boton guardar nim
