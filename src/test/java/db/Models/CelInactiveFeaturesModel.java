@@ -30,4 +30,3 @@ public class CelInactiveFeaturesModel {
     private String pif_end_date;
 
 }
-

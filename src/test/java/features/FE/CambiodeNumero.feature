@@ -21,7 +21,7 @@ Feature: Cambio de Nim
     Then  Se debe actualizar numero actual con nuevo numero de linea obtenido
     And   Se verifica el mensaje esperado "mensaje_esperado"
 
-  #@browser
+  @browser
   Scenario: TC_002_Hacer_NIM_con_numero_especial_del_la_lista_sugerida
     Given Se busca el billing number "3512072771"
     And   Se setea el codigo de area con "11"
@@ -36,6 +36,7 @@ Feature: Cambio de Nim
     Then  Se debe actualizar numero actual con nuevo numero de linea obtenido
     And   Se verifica el mensaje esperado "mensaje_esperado"
 
+  @test
   @browser
   Scenario: TC_003_Hacer_NIM_elegido_manualmente
     Given Se busca el billing number "3512072771"
@@ -176,7 +177,7 @@ Feature: Cambio de Nim
       |  3516858230  |	358	      |	N0800	   |	RIO CUARTO	                    |
       |  3516858230  |	2982	  |	S2990	   |	CLAROMECO                       |
 
-  #@browser
+  @browser
   Scenario Outline: TC_009_Completar_campos_requeridos_para_hacer_NIM
     Given    Se busca el billing number "<numero>"
     When     Se hace click en el boton guardar nim
