@@ -5,6 +5,7 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
 import db.HibernateUtil;
+import db.JDBC;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -37,11 +38,13 @@ public class Hooks {
     @Before("@rest, @Dummy")
     public void RestSetUp() throws IOException {
         RestAssuredExtension restAssuredExtension = new RestAssuredExtension();
+
     }
 
     @Before("@Oracle, @Dummy")
     public void HibernateSetUp() throws IOException {
         HibernateUtil hibernateUtil = new HibernateUtil();
+        JDBC jdbc = new JDBC();
     }
 
     @After("@browser, @Dummy")

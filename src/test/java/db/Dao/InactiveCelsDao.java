@@ -1,11 +1,16 @@
 package db.Dao;
 
+import cucumber.api.java.gl.E;
 import db.Models.CelInactiveFeaturesModel;
 import db.HibernateUtil;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 public class InactiveCelsDao {
@@ -83,7 +88,7 @@ public class InactiveCelsDao {
 
             session.close();
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             System.out.println("No se encontraron resultados para :"+ primaryKey);
         }
 
@@ -113,5 +118,35 @@ public class InactiveCelsDao {
             e.printStackTrace();
         }
     }
+
+    public static Object QuerySQL(){
+        Object rows = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            //start the transaction
+            session.getTransaction();
+            Query query = session.createSQLQuery("select tck.TCK_ID from TICKLERS as tck WHERE TCK_ID='194292078'");
+            rows = query.getFirstResult();
+
+        }catch (Exception e){
+            System.out.println("Algo salio mal");
+        }
+        return rows;
+    }
+
+
+    public static void QueryExample() {
+        NativeQuery miQuery = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            //start the transaction
+            session.getTransaction();
+            miQuery = session.createNativeQuery("select * from TICKLERS WHERE TCK_ID='194292078'");
+        } catch (Exception e) {
+        }
+        miQuery.getResultList();
+
+    }
+
+
+
 
 }

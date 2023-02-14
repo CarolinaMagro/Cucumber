@@ -4,6 +4,7 @@ package glue;
 import junit.framework.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import pom.pages.CambioDeEstadoPage;
 import pom.pages.CambioDeNimPage;
 import pom.pages.LoginPage;
 import pom.pages.PrincipalPage;
@@ -19,5 +20,7 @@ public class TestBase {
     protected PrincipalPage principalPage = PageFactory.initElements(driver, PrincipalPage.class);
 
     protected LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+
+    protected CambioDeEstadoPage cambioDeEstadoPage = PageFactory.initElements(driver, CambioDeEstadoPage.class);
 
 }
