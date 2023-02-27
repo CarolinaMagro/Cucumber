@@ -19,10 +19,6 @@ public class CambioDeNimPageSteps extends TestBase {
 
 
 
-    @Given("^Se ingresa el billing number \"([^\"]*)\"$")
-    public void seIngresaElBillingNumber(String billingNumber) throws Throwable {
-
-    }
 
     @And("^Se setea el codigo de area con \"([^\"]*)\"$")
     public void seSeteaElCodigoDeAreaConElNumero(String codArea) throws Throwable {
@@ -69,7 +65,7 @@ public class CambioDeNimPageSteps extends TestBase {
     }
 
 
-    @Given("^Se busca el billing number \"([^\"]*)\"$")
+    /*@Given("^Se busca el billing number \"([^\"]*)\"$")
     public void seBuscaElBillingNumber(String billingNumber) throws Throwable {
         cambioDeNimPage.setInputBillingNumber(billingNumber);
         cambioDeNimPage.clickOnButtonSearch();
@@ -79,7 +75,7 @@ public class CambioDeNimPageSteps extends TestBase {
             time += 0.25;
         }
         Assert.assertTrue(cambioDeNimPage.getNumeroActual().equalsIgnoreCase(billingNumber));
-    }
+    }*/
 
 
     @And("^Se debe actualizar numero actual con nuevo numero de linea obtenido$")

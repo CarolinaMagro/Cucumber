@@ -5,9 +5,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import glue.Hooks;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.LogHelper;
 
 
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -147,6 +151,29 @@ public class BasePage {
         } catch (Exception e) {
             throw new Exception("Could not get the text of the following element: " + element);
         }
+    }
+
+
+    public void waitForEnable(WebElement element) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(driver -> element.getAttribute("disabled") == null);
+        Thread.sleep(500);
+    }
+
+    public void waitPresenceOfElement(By element) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(element));
+    }
+
+    public void waitPresenceOfElement(WebElement element) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(driver -> element.isDisplayed());
+    }
+
+    public void waitValue(WebElement element, String cadena) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(driver -> element.getAttribute("value")!=null);
+        Thread.sleep(500);
     }
 
 

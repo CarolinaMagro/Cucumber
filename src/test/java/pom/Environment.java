@@ -15,6 +15,8 @@ public interface Environment extends Config {
     String urlPantallaPrincipal();
     String urlCambioNim();
 
+    String urlCambioEstado();
+
     String titlePage();
 
 

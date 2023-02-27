@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pom.BasePage;
 
 import java.util.ArrayList;
@@ -11,42 +13,39 @@ import java.util.List;
 
 public class CambioDeEstadoPage extends BasePage {
 
-        @FindBy(id ="input-billing_number")
-        private WebElement inputBillingNumber;
-
-        @FindBy(id ="button-search")
-        private WebElement buttonSearch;
 
 
+        @FindBy(xpath="//*[@name='currentState']/p[2]")
+        private WebElement currentState;
 
-        @FindBy(xpath="//[contains(text()='Activo')]")
-        private WebElement estadoActual;
 
-        @FindBy(xpath="//[contains(text()='RazonActual')]")
+
+
+        @FindBy(id="input_input-sc")
         private WebElement razonActual;
 
 
 
-        @FindBy(xpath="//[contains(text()='Cancelado')]")
+        @FindBy(name="cancel_button")
         private WebElement btnCancelado;
 
-        @FindBy(xpath="//[contains(text()='Suspendido')]")
+        @FindBy(name="suspend_button")
         private WebElement btnSuspendido;
 
-        @FindBy(xpath="//[contains(text()='Activo')]")
+        @FindBy(name="activate_button")
         private WebElement btnActivo;
 
-        @FindBy(xpath="//[contains(text()='RazonActual')]")
+        @FindBy(id = "dropdown_dropdown-sc")
         private WebElement selectRazon;
 
 
 
 
-        @FindBy(xpath="//[contains(text()='RazonActual')]")
-        private WebElement btnGuardarCambio;
+        @FindBy(id="button_button-grabar")
+        private WebElement btnGrabarCambio;
 
 
-        @FindBy(xpath="//[contains(text()='RazonActual')]")
+        @FindBy(id="button_button-cancelar")
         private WebElement btnCancelarCambio;
 
 
@@ -59,31 +58,67 @@ public class CambioDeEstadoPage extends BasePage {
 
 
         public void setEstadoCancelado() throws Exception {
-                btnCancelado.click();
+                waitForEnable(btnCancelado);
+                click(btnCancelado);
+
         }
 
         public void setEstadoActivo() throws  Exception{
-                btnActivo.click();
+                waitForEnable(btnActivo);
+                click(btnActivo);
         }
 
         public void setEstadoSuspendido() throws Exception{
-                btnSuspendido.click();
+                waitForEnable(btnSuspendido);
+                click(btnSuspendido);
         }
 
-        public String getEstadoActual()throws Exception{
-             return   estadoActual.getText();
+        public String getCurrentState()throws Exception{
+             return   getText(currentState);
         }
 
         public String getRazonActual()throws Exception{
-                return razonActual.getText();
+                return getValue(razonActual);
         }
 
-        public void setRazon(String razon) throws Exception{
-                selectRazon.click();
-                Thread.sleep(200);
-                getDriver().findElement(By.xpath("//*[contains(text()='"+razon+"')]"));
+        public void setRazon(String razon) throws Exception {
+                waitForEnable(selectRazon);
+                click(selectRazon);
+                waitPresenceOfElement(By.xpath("//*[contains(text(),'" + razon + "')]"));
+                click(getDriver().findElement(By.xpath("//*[contains(text(),'" + razon + "')]")));
         }
 
+        public void goToCambioDeEstadoPage(){
+                getDriver().get(environment().urlCambioEstado());
+        }
 
+        public boolean cambioDeEstadoPageIsDisplayed() throws InterruptedException {
+                int time = 0;
+                while (!currentState.isDisplayed() && time < 20) {
+                        Thread.sleep(250);
+                        time += 0.25;
+                }
+                return  currentState.isDisplayed();
+        }
 
+         public void clickBtnGrabarCambio() throws Exception {
+                click(btnGrabarCambio);
+         }
+
+         public boolean isNewStateEnabled(String newState) throws InterruptedException {
+                 waitPresenceOfElement(selectRazon);
+                 switch (newState.toUpperCase()) {
+                         case "ACTIVA" :
+                               return  btnActivo.isEnabled();
+                         case "SUSPENDIDA":
+                                 return btnSuspendido.isEnabled();
+                         case "CANCELADA":
+                                 return btnCancelado.isEnabled();
+                         default:
+                                 System.out.println("Opciones validas ACTIVA, CANCELADA o SUSPENDIDA. Opcion ingresada: "+newState);
+                                 return false;
+
+                 }
+         }
 }
+
