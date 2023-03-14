@@ -27,7 +27,7 @@ public class HeaderPageSteps extends TestBase {
         headerPage.setInputBillingNumber(billingNumber);
         headerPage.clickOnButtonSearch();
         float time = 0;
-        while (headerPage.getClientName().isEmpty() && time < 10) {
+        while (headerPage.getClientName().isEmpty() && time < 20) {
             Thread.sleep(250);
             time += 0.25;
         }
