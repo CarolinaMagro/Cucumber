@@ -113,6 +113,8 @@ Feature: Cambio de Nim
     And   Se obtiene el nuevo numero de linea
     And  Se hace click en el boton guardar nim
     And   Se verifica el mensaje esperado "mensaje_esperado"
+    
+    And Se ingresa el billing number "<string>"
     #terminar
 
   @browser

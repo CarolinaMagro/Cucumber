@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import glue.Hooks;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.LogHelper;
 
 
@@ -149,5 +151,54 @@ public class BasePage {
         }
     }
 
+
+    public void waitForEnable(WebElement element) throws Exception {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+            wait.until(driver -> element.isEnabled());
+            Thread.sleep(500);
+        }catch (Exception e){
+            throw new Exception("The element "+element+" is not enabled");
+        }
+    }
+
+    public void waitPresenceOfElement(By element) throws Exception {
+        try{
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(element));
+        }catch (Exception e){
+            throw new Exception("The element "+element+" is not present");
+        }
+    }
+
+    public void waitPresenceOfElement(WebElement element) throws Exception {
+        try{
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(driver -> element.isDisplayed());
+        Thread.sleep(500);
+        }catch (Exception e){
+        throw new Exception("The element "+element+" is not present");
+        }
+    }
+
+    public void waitValueNotNull(WebElement element) throws Exception {
+        try{
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(driver -> element.getAttribute("value")!=null);
+        Thread.sleep(500);
+        }catch (Exception e){
+            throw new Exception("Could not get the text of the following element: " + element);
+        }
+    }
+
+    public void waitForValue(WebElement element, String cadena) throws Exception {
+        try{
+        WebDriverWait wait = new WebDriverWait(getDriver(), 20);
+        wait.until(driver -> element.getAttribute("value").toUpperCase().contains(cadena.toUpperCase()));
+        Thread.sleep(500);
+    }catch (Exception e){
+        throw new Exception("New value ("+cadena+") is not present in the element "+element);
+    }
+    }
 
 }

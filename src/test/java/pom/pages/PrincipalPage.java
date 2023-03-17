@@ -8,13 +8,18 @@ import org.openqa.selenium.support.FindBy;
 
 public class PrincipalPage extends BasePage {
 
-
-
-        @FindBy(xpath = "//*[contains(text(), 'PGN')]")
-        private WebElement titlePrincipalLocator;
-
-        @FindBy(xpath = "//*[contains(text(), 'Cambio de Número')]")
+        @FindBy(id="div-change_nim")
         private WebElement btnCambioDeNim;
+
+        @FindBy(id="div-status")
+        private WebElement btnEstados;
+
+        @FindBy(id="div-packages")
+        private WebElement btnPaquetes;
+
+        @FindBy(id="div-_content")
+        private WebElement divContent;
+
 
 
         public PrincipalPage(WebDriver driver){
@@ -26,7 +31,7 @@ public class PrincipalPage extends BasePage {
         }
 
         public boolean principalPageIsDisplayed() throws Exception {
-            return isDisplayed(titlePrincipalLocator);
+            return isDisplayed(divContent);
         }
 
 
