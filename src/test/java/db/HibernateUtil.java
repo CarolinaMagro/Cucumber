@@ -3,6 +3,7 @@ package db;
 import java.util.Properties;
 
 import db.Models.CelInactiveFeaturesModel;
+import db.Models.TicklersModel;
 import org.aeonbits.owner.ConfigFactory;
 import org.hibernate.SessionFactory;
 
@@ -15,22 +16,19 @@ import org.hibernate.service.ServiceRegistry;
 public class HibernateUtil {
     private static SessionFactory sessionFactory;
 
-    private static pom.Environment environment;
+
     public HibernateUtil(){
         environment = ConfigFactory.create(pom.Environment.class);
     }
 
+    private static pom.Environment environment;
     public static pom.Environment environment(){return environment;
     }
 
 
     public static SessionFactory getSessionFactory(){
         if(sessionFactory == null){
-            String titlePage= environment.titlePage();
-
-            System.out.println("ajshdfkjasfa"+titlePage);
-            try {
-
+               try {
 
                 Configuration configuration = new Configuration();
                 //Hibernate settings equivalent to hibernate.cfg.xml's properties
@@ -63,6 +61,8 @@ public class HibernateUtil {
 
                 //Aqui las clases POJO
                 configuration.addAnnotatedClass(CelInactiveFeaturesModel.class);
+                configuration.addAnnotatedClass(TicklersModel.class);
+
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().
                         applySettings(configuration.getProperties()).build();

@@ -30,9 +30,10 @@ public class LoginPageSteps extends TestBase {
 
     @And("^Se debe dirigir a la pantalla con titulo \"([^\"]*)\"$")
     public void seDebeDirigirALaPantallaConTitulo(String title) throws Exception {
-        assertEquals(loginPage.getTitle(), title);
+        assertEquals(title,loginPage.getTitle());
 
     }
 
 
 }
+
