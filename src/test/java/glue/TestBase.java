@@ -17,7 +17,7 @@ public class TestBase {
     protected PrincipalPage principalPage = PageFactory.initElements(driver, PrincipalPage.class);
     protected LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
     protected CambioDeEstadoPage cambioDeEstadoPage = PageFactory.initElements(driver, CambioDeEstadoPage.class);
-
     protected HeaderPage headerPage = PageFactory.initElements(driver, HeaderPage.class);
+    protected PaquetesPage paquetesPage = PageFactory.initElements(driver, PaquetesPage.class);
 
 }
