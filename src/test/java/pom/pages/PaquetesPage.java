@@ -1,5 +1,6 @@
 package pom.pages;
 
+import gherkin.lexer.Vi;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,7 @@ import pom.pages.packagesObjets.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PaquetesPage extends BasePage {
         @FindBy(id = "input-availables_search")
@@ -74,22 +76,30 @@ public class PaquetesPage extends BasePage {
                 super(driver);
         }
 
+        public void goToPaquetesPage() {
+                getDriver().get(environment().urlPaquetes());
+
+        }
+
         public void SearchInput(WebElement element, String packageNeeded, WebElement scv) throws Exception {
                 waitForEnable(element);
                 setText(element, packageNeeded);
                 click(scv);
 
         }
-        public void SelectPackage(WebElement element, String packageNeeded, WebElement scv) throws Exception{
+
+        public void SelectPackage(WebElement element, String packageNeeded, WebElement scv) throws Exception {
                 SearchInput(element, packageNeeded, scv);
                 waitForEnable(tableAvailables);
 
                 click(btnSave);
                 waitForEnable(inputSearchCandidates);
         }
-        public List<List<WebElement>> GetTable(@NotNull WebElement table)throws Exception{
-                List<List<WebElement>> tableOut= new ArrayList<List<WebElement>>();
-                List<WebElement> rowOut= new ArrayList<WebElement>();
+
+        public List<List<WebElement>> GetTable(@NotNull WebElement table) throws Exception {
+                waitForEnable(tableAvailables);
+                List<List<WebElement>> tableOut = new ArrayList<List<WebElement>>();
+                List<WebElement> rowOut = new ArrayList<WebElement>();
 
                 List<WebElement> rows = table.findElements(By.tagName("tr"));
                 for (WebElement row : rows) {
@@ -100,7 +110,7 @@ public class PaquetesPage extends BasePage {
                 return tableOut;
         }
 
-        public List<Vigentes> GetCurrents()throws Exception{
+        public List<Vigentes> GetCurrents() throws Exception {
                 Vigentes Currents = new Vigentes();
                 List<Vigentes> CurrentTable = new ArrayList<Vigentes>();
                 List<List<WebElement>> tablaWebElement = new ArrayList<List<WebElement>>();
@@ -119,7 +129,8 @@ public class PaquetesPage extends BasePage {
                 }
                 return CurrentTable;
         }
-        public List<Servicios> GetServices()throws Exception{
+
+        public List<Servicios> GetServices() throws Exception {
                 Servicios Services = new Servicios();
                 List<Servicios> ServicesTable = new ArrayList<Servicios>();
                 List<List<WebElement>> tablaWebElement = new ArrayList<List<WebElement>>();
@@ -134,7 +145,8 @@ public class PaquetesPage extends BasePage {
                 }
                 return ServicesTable;
         }
-        public List<Comportamientos> GetBehavior()throws Exception{
+
+        public List<Comportamientos> GetBehavior() throws Exception {
                 Comportamientos Behavior = new Comportamientos();
                 List<Comportamientos> BehaviorTable = new ArrayList<Comportamientos>();
                 List<List<WebElement>> tablaWebElement = new ArrayList<List<WebElement>>();
@@ -146,7 +158,8 @@ public class PaquetesPage extends BasePage {
                 }
                 return BehaviorTable;
         }
-        public List<ComportamientosHistorico> GetBehaviorHistoric()throws Exception{
+
+        public List<ComportamientosHistorico> GetBehaviorHistoric() throws Exception {
                 ComportamientosHistorico BehaviorHistoric = new ComportamientosHistorico();
                 List<ComportamientosHistorico> BehaviorHistoricTable = new ArrayList<ComportamientosHistorico>();
                 List<List<WebElement>> tablaWebElement = new ArrayList<List<WebElement>>();
@@ -160,7 +173,8 @@ public class PaquetesPage extends BasePage {
                 }
                 return BehaviorHistoricTable;
         }
-        public List<Tickler> GetTickler()throws Exception{
+
+        public List<Tickler> GetTickler() throws Exception {
                 Tickler Tickler = new Tickler();
                 List<Tickler> TicklerTable = new ArrayList<Tickler>();
                 List<List<WebElement>> tablaWebElement = new ArrayList<List<WebElement>>();
@@ -183,7 +197,8 @@ public class PaquetesPage extends BasePage {
                 }
                 return TicklerTable;
         }
-        public List<Historico> GetHistoric()throws Exception{
+
+        public List<Historico> GetHistoric() throws Exception {
                 Historico Historic = new Historico();
                 List<Historico> HistoricTable = new ArrayList<Historico>();
                 List<List<WebElement>> tablaWebElement = new ArrayList<List<WebElement>>();
@@ -202,23 +217,163 @@ public class PaquetesPage extends BasePage {
                 }
                 return HistoricTable;
         }
-        public void goToPaquetesPage() {
-                getDriver().get(environment().urlPaquetes());
 
+
+        public Object SearchRow(@NotNull String text, List<Vigentes> currents, List<Servicios> services,
+                                List<Comportamientos> behaviors, List<ComportamientosHistorico> behaivorHistorics,
+                                List<Tickler> Ticklers, List<Historico> Historics) throws Exception {
+
+                if (currents instanceof Vigentes) {
+                        for (Vigentes current : currents) {
+                                if (current.idPaquete.contains(text)) {
+                                        return current;
+                                } else if (current.descripcion.contains(text)) {
+                                        return current;
+                                }
+
+                        }
+                } else if (services instanceof Servicios) {
+                        for (Servicios service : services) {
+                                if (service.idFeatures.contains(text)) {
+                                        return service;
+                                } else if (service.descripcion.contains(text)) {
+                                        return service;
+                                }
+                        }
+                } else if (behaviors instanceof Comportamientos) {
+                        for (Comportamientos behavior : behaviors) {
+                                if (behavior.descripcion.contains(text)) {
+                                        return behavior;
+                                }
+                        }
+                } else if (behaivorHistorics instanceof ComportamientosHistorico) {
+                        for (ComportamientosHistorico behaivorHistoric : behaivorHistorics) {
+                                if (behaivorHistoric.descripcion.contains(text)) {
+                                        return behaivorHistoric;
+                                } else if (behaivorHistoric.usr.contains(text)) {
+                                        return behaivorHistoric;
+                                } else if (behaivorHistoric.cancelacion.contains(text)) {
+                                        return behaivorHistoric;
+                                } else if (behaivorHistoric.activacion.contains(text)) {
+                                        return behaivorHistoric;
+                                }
+                        }
+
+                } else if (Ticklers instanceof Tickler) {
+                        for (Tickler tickler : Ticklers) {
+                                if (tickler.numeroDeTickler.contains(text)) {
+                                        return tickler;
+                                } else if (tickler.fechaHora.contains(text)) {
+                                        return tickler;
+                                } else if (tickler.usr.contains(text)) {
+                                        return tickler;
+                                } else if (tickler.usr2.contains(text)) {
+                                        return tickler;
+                                } else if (tickler.grupoDeUsuario.contains(text)) {
+                                        return tickler;
+                                } else if (tickler.grupoDeUsuario2.contains(text)) {
+                                        return tickler;
+                                } else if (tickler.accion.contains(text)) {
+                                        return tickler;
+                                } else if (tickler.accion2.contains(text)) {
+                                        return tickler;
+                                } else if (tickler.razon.contains(text)) {
+                                        return tickler;
+                                } else if (tickler.razon2.contains(text)) {
+                                        return tickler;
+                                } else if (tickler.estado.contains(text)) {
+                                        return tickler;
+                                } else if (tickler.estado2.contains(text)) {
+                                        return tickler;
+                                } else if (tickler.descripcion.contains(text)) {
+                                        return tickler;
+                                }
+                        }
+                } else if (Historics instanceof Historico) {
+                        for (Historico historic : Historics) {
+                                if (historic.idPaquete.contains(text)) {
+                                        return historic;
+                                } else if (historic.descripcion.contains(text)) {
+                                        return historic;
+                                } else if (historic.activacion.contains(text)) {
+                                        return historic;
+                                } else if (historic.modificacion.contains(text)) {
+                                        return historic;
+                                } else if (historic.cancelacion.contains(text)) {
+                                        return historic;
+                                } else if (historic.familia.contains(text)) {
+                                        return historic;
+                                } else if (historic.usrAlta.contains(text)) {
+                                        return historic;
+                                } else if (historic.usrBaja.contains(text)) {
+                                        return historic;
+                                }
+                        }
+
+
+                }
+                return null;
         }
+        public Object SearchRow(String text, List<?> objects) throws Exception {
 
+                if (objects instanceof Vigentes) {
+                        List<Vigentes> listaVigentes = new ArrayList<Vigentes>();
+                        for (Object objeto : objects) {
+                                Vigentes vigentes = (Vigentes) objeto; // Castear cada objeto a MiTipo
+                                listaVigentes.add(vigentes); // Agregar el objeto a la lista de MiTipo
+                        }
+                        return SearchRow(text, listaVigentes, null, null, null, null, null);
+                } else if (objects instanceof Servicios) {
+                        List<Servicios> listaServicios = new ArrayList<Servicios>();
+                        for (Object objeto : objects) {
+                                Servicios servicios = (Servicios) objeto; // Castear cada objeto a MiTipo
+                                listaServicios.add(servicios); // Agregar el objeto a la lista de MiTipo
+                        }
+                        return SearchRow(text, null, listaServicios, null, null, null, null);
+                } else if (objects instanceof Comportamientos) {
+                        List<Comportamientos> listaComportamientos = new ArrayList<Comportamientos>();
+                        for (Object objeto : objects) {
+                                Comportamientos comportamientos = (Comportamientos) objeto; // Castear cada objeto a MiTipo
+                                listaComportamientos.add(comportamientos); // Agregar el objeto a la lista de MiTipo
+                        }
+                        return SearchRow(text, null, null, listaComportamientos, null, null, null);
+                } else if (objects instanceof ComportamientosHistorico) {
+                        List<ComportamientosHistorico> listaComportamientosHistorico = new ArrayList<ComportamientosHistorico>();
+                        for (Object objeto : objects) {
+                                ComportamientosHistorico comportamientosHistorico = (ComportamientosHistorico) objeto; // Castear cada objeto a MiTipo
+                                listaComportamientosHistorico.add(comportamientosHistorico); // Agregar el objeto a la lista de MiTipo
+                        }
+                        return SearchRow(text, null, null, null, listaComportamientosHistorico, null, null);
+                } else if (objects instanceof Tickler) {
+                        List<Tickler> listaTickler = new ArrayList<Tickler>();
+                        for (Object objeto : objects) {
+                                Tickler tickler = (Tickler) objeto; // Castear cada objeto a MiTipo
+                                listaTickler.add(tickler); // Agregar el objeto a la lista de MiTipo
+                        }
+                        return SearchRow(text, null, null, null, null, listaTickler, null);
+                } else if (objects instanceof Historico) {
+                        List<Historico> listaHistorico = new ArrayList<Historico>();
+                        for (Object objeto : objects) {
+                                Historico historico = (Historico) objeto; // Castear cada objeto a MiTipo
+                                listaHistorico.add(historico); // Agregar el objeto a la lista de MiTipo
+                        }
+                        return SearchRow(text, null, null, null, null, null, listaHistorico);
+                }
+            return null;
+        }
+}
 
-
- //      SearchInput (input, str) OK
+                //      SearchInput (input, str) OK
  //      SelectAvailables (str) => bool
  //      GetTable (table) => list ok
         // Get Objet ( current - historic - behavior - historic behaivor - tickler - services)
-
 //      SearchInTable  (string, table) => row
+
  //      Activate/desactivateSwitch (row) =>bool
  //      VerifyStateSwitch (row) =>bool
  //      SwitchToTab (string)
  //      GetFormatedForm (form) => dictionary
+
  //      GetMessages => String
  //      ValidateMessages (list[string] )=> Bool
 
@@ -307,5 +462,5 @@ public class PaquetesPage extends BasePage {
                 }
 
         }*/
-}
+
 
