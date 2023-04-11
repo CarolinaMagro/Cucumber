@@ -99,7 +99,11 @@ public class PaquetesPageSteps extends TestBase {
         TicklerTable = paquetesPage.GetTickler();
         List<Historico> HistoricTable = new ArrayList<Historico>();
         HistoricTable = paquetesPage.GetHistoric();
-
+        Object row = paquetesPage.SearchRow("COILIX", CurrentTable );
+        Historico rowHistoric= (Historico) paquetesPage.SearchRow("COILIX", HistoricTable );
+        paquetesPage.goToPaquetesPageTiclkerTab();
+        paquetesPage.goToPaquetesPageBehaviorTab();
+        paquetesPage.goToPaquetesPageServicesTab();
     }
 
     @When("^asdfasd$")

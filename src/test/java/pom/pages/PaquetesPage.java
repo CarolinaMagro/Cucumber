@@ -80,6 +80,18 @@ public class PaquetesPage extends BasePage {
                 getDriver().get(environment().urlPaquetes());
 
         }
+        public void goToPaquetesPageServicesTab() {
+                getDriver().get(environment().urlPaquetesServicesTab());
+
+        }
+        public void goToPaquetesPageBehaviorTab() {
+                getDriver().get(environment().urlPaquetesBehaviorTab());
+
+        }
+        public void goToPaquetesPageTiclkerTab() {
+                getDriver().get(environment().urlPaquetesTicklerTab());
+
+        }
 
         public void SearchInput(WebElement element, String packageNeeded, WebElement scv) throws Exception {
                 waitForEnable(element);
@@ -361,7 +373,32 @@ public class PaquetesPage extends BasePage {
                 }
             return null;
         }
+        public Boolean VerifyStateSwitch(WebElement element) throws Exception {
+                return element.isSelected();
+        }
+        public Boolean ChancheStatus(WebElement element)throws Exception {
+               element.click();
+               waitForEnable(element);
+               return VerifyStateSwitch(element);
+        }
+        public ArrayList<String> catch_messages() throws Exception {
+                List<WebElement> messages= getDriver().findElements(By.xpath("//*[@id='root']/div[1]/div"));
+                ArrayList<String> mensajes_texto= new ArrayList<String>();
+
+                for (int i = 1; i < messages.size()+1; i++){
+                        String element1 = getText(getDriver().findElement(By.xpath("//*[@id='root']/div[1]/div["+i+"]/div[1]/p")));
+                        String element2 = getText(getDriver().findElement(By.xpath("//*[@id='root']/div[1]/div["+i+"]/div[2]/p")));
+                        mensajes_texto.add(" "+element1 +" "+ element2);
+                }
+                return mensajes_texto;
+        }
+
+        public Boolean ValidateMessages (List<String> list) throws Exception {
+
+        return false;
+        }
 }
+
 
                 //      SearchInput (input, str) OK
  //      SelectAvailables (str) => bool
@@ -371,8 +408,9 @@ public class PaquetesPage extends BasePage {
 
  //      Activate/desactivateSwitch (row) =>bool
  //      VerifyStateSwitch (row) =>bool
+
  //      SwitchToTab (string)
- //      GetFormatedForm (form) => dictionary
+ //      GetFormatedForm (form) => dictionary (hecho con los objetos)
 
  //      GetMessages => String
  //      ValidateMessages (list[string] )=> Bool

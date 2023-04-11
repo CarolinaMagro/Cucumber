@@ -17,6 +17,9 @@ public interface Environment extends Config {
 
     String urlCambioEstado();
     String urlPaquetes();
+    String urlPaquetesServicesTab();
+    String urlPaquetesBehaviorTab();
+    String urlPaquetesTicklerTab();
     String titlePage();
 
 

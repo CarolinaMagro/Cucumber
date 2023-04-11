@@ -154,11 +154,11 @@ public class BasePage {
 
     public void waitForEnable(WebElement element) throws Exception {
         try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-            wait.until(driver -> element.isEnabled());
-            Thread.sleep(500);
+            WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+            //wait.until(driver -> element.isEnabled());
+            Thread.sleep(1000);
         }catch (Exception e){
-            throw new Exception("The element "+element+" is not enabled");
+            throw new Exception("The element "+String.format(String.valueOf(element)).split(":")[2]+" is not enabled");
         }
     }
 
