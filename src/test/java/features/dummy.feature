@@ -9,7 +9,7 @@ Como QA automation quiero ingresar a la pantalla Cambio de Nim para testear su c
 
   @Dummy
   Scenario: scenario de prueba
-    Given Se busca el billing number "1121619069"
+    Given Se busca el billing number "1126686610"
     And quiero hacer un test
     When asdfasd
     Then  dfgdsf

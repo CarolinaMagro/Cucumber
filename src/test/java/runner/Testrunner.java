@@ -19,15 +19,12 @@ import java.util.logging.Logger;
         features = "src/test/java/features/",
         glue = {"glue"},
         plugin = {"json:test/report/cucumber_report.json"},
-        snippets = SnippetType.CAMELCASE
-        ,tags = {"@Dummy"}
+        snippets = SnippetType.CAMELCASE,
+        tags = {"@Dummy"}
 )
 
 public class Testrunner {
-
-
     private static final Logger LOGGER = LogHelper.getLogger(Testrunner.class);
-
 
     @BeforeClass()
     public static void setUp(){
@@ -36,13 +33,9 @@ public class Testrunner {
         LOGGER.log(Level.INFO, "Starting environment: "+System.getProperty("environment"));
         }
 
-
-
-
     @AfterClass
     public static void teardown(){
         //closeLocalServer();
-
 
         try {
             LOGGER.log(Level.INFO, "Generating report...");
@@ -54,10 +47,6 @@ public class Testrunner {
             ex.printStackTrace();
         }
     }
-
-
-
-
 
     private static void startLocalServer() {
         if (System.getProperty("environment").equalsIgnoreCase("local")) {
@@ -87,6 +76,4 @@ public class Testrunner {
             }
         }
     }
-
-
 }

@@ -8,6 +8,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import glue.TestBase;
 import org.junit.Assert;
+import pom.pages.PaquetesPage;
 import pom.pages.packagesObjets.*;
 
 import java.util.ArrayList;
@@ -92,11 +93,14 @@ public class PaquetesPageSteps extends TestBase {
         List<Servicios> ServicesTable = new ArrayList<Servicios>();
         ServicesTable = paquetesPage.GetServices();
         List<Comportamientos> BehaviorTable = new ArrayList<Comportamientos>();
+        paquetesPage.goToPaquetesPageBehaviorTab();
         BehaviorTable = paquetesPage.GetBehavior();
         List<ComportamientosHistorico> BehaviorHistoricTable = new ArrayList<ComportamientosHistorico>();
         BehaviorHistoricTable = paquetesPage.GetBehaviorHistoric();
         List<Tickler> TicklerTable = new ArrayList<Tickler>();
+        paquetesPage.goToPaquetesPageTiclkerTab();
         TicklerTable = paquetesPage.GetTickler();
+        paquetesPage.clickHistoricButton();
         List<Historico> HistoricTable = new ArrayList<Historico>();
         HistoricTable = paquetesPage.GetHistoric();
         Object row = paquetesPage.SearchRow("COILIX", CurrentTable );
@@ -104,6 +108,11 @@ public class PaquetesPageSteps extends TestBase {
         paquetesPage.goToPaquetesPageTiclkerTab();
         paquetesPage.goToPaquetesPageBehaviorTab();
         paquetesPage.goToPaquetesPageServicesTab();
+        paquetesPage.SearchRow("COILIX",HistoricTable);
+        paquetesPage.catch_messages();
+        paquetesPage.ValidateMessages("Exito");
+        //paquetesPage.VerifyStateSwitch();
+        //paquetesPage.ChangeStatus();
     }
 
     @When("^asdfasd$")

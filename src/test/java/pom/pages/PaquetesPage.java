@@ -14,16 +14,17 @@ import java.util.List;
 import java.util.Objects;
 
 public class PaquetesPage extends BasePage {
+
         @FindBy(id = "input-availables_search")
         private WebElement inputSearchCandidates;
 
         @FindBy(id = "svg-search_icon")
         private WebElement svgCandidatesSearch;
 
-        @FindBy(id = "form-tickler")
+        @FindBy(id = "div-tabs_container")
         private WebElement formTickler;
 
-        @FindBy(id = "table-currents")
+        @FindBy(id = "div-currents_table")
         private WebElement tableCurrents;
 
         @FindBy(id = "table-features")
@@ -34,6 +35,9 @@ public class PaquetesPage extends BasePage {
 
         @FindBy(id = "table-conducts_history")
         private WebElement tableBehaviorHistory;
+
+        @FindBy(css = "div[data-testid='errormodule']")
+        private WebElement errorModuleBehaivor;
 
         @FindBy(id = "button-show_history")
         private WebElement btnShowHistory;
@@ -78,32 +82,37 @@ public class PaquetesPage extends BasePage {
 
         public void goToPaquetesPage() {
                 getDriver().get(environment().urlPaquetes());
-
         }
         public void goToPaquetesPageServicesTab() {
                 getDriver().get(environment().urlPaquetesServicesTab());
-
         }
         public void goToPaquetesPageBehaviorTab() {
                 getDriver().get(environment().urlPaquetesBehaviorTab());
-
         }
         public void goToPaquetesPageTiclkerTab() {
                 getDriver().get(environment().urlPaquetesTicklerTab());
+        }
 
+
+
+        public void clickHistoricButton(){
+                try {
+                        click(btnShowHistory);
+                }
+                catch (Exception e) {
+                       System.out.println("No se pudo clickear el boton historico");
+                }
         }
 
         public void SearchInput(WebElement element, String packageNeeded, WebElement scv) throws Exception {
                 waitForEnable(element);
                 setText(element, packageNeeded);
                 click(scv);
-
         }
 
         public void SelectPackage(WebElement element, String packageNeeded, WebElement scv) throws Exception {
                 SearchInput(element, packageNeeded, scv);
                 waitForEnable(tableAvailables);
-
                 click(btnSave);
                 waitForEnable(inputSearchCandidates);
         }
@@ -111,15 +120,13 @@ public class PaquetesPage extends BasePage {
         public List<List<WebElement>> GetTable(@NotNull WebElement table) throws Exception {
                 waitForEnable(tableAvailables);
                 List<List<WebElement>> tableOut = new ArrayList<List<WebElement>>();
-                List<WebElement> rowOut = new ArrayList<WebElement>();
-
                 List<WebElement> rows = table.findElements(By.tagName("tr"));
+                rows.remove(0);
                 for (WebElement row : rows) {
                         List<WebElement> columns = row.findElements(By.tagName("td"));
-                        rowOut.addAll(columns);
+                        tableOut.add(columns);
                 }
-                tableOut.add(rowOut);
-                return tableOut;
+             return tableOut;
         }
 
         public List<Vigentes> GetCurrents() throws Exception {
@@ -137,7 +144,6 @@ public class PaquetesPage extends BasePage {
                         Currents.familia = row.get(6).getText();
                         Currents.desactivar = row.get(7); // web element (switch)
                         CurrentTable.add(Currents);
-
                 }
                 return CurrentTable;
         }
@@ -162,11 +168,13 @@ public class PaquetesPage extends BasePage {
                 Comportamientos Behavior = new Comportamientos();
                 List<Comportamientos> BehaviorTable = new ArrayList<Comportamientos>();
                 List<List<WebElement>> tablaWebElement = new ArrayList<List<WebElement>>();
-                tablaWebElement = (GetTable(tableBehavior));
-                for (List<WebElement> row : tablaWebElement) {
-                        Behavior.descripcion = row.get(0).getText();// web element (switch)
-                        Behavior.activar = row.get(1);
-                        BehaviorTable.add(Behavior);
+                if(errorModuleBehaivor.isDisplayed()) {
+                        tablaWebElement = (GetTable(tableBehavior));
+                        for (List<WebElement> row : tablaWebElement) {
+                                Behavior.descripcion = row.get(0).getText();// web element (switch)
+                                Behavior.activar = row.get(1);
+                                BehaviorTable.add(Behavior);
+                        }
                 }
                 return BehaviorTable;
         }
@@ -175,13 +183,16 @@ public class PaquetesPage extends BasePage {
                 ComportamientosHistorico BehaviorHistoric = new ComportamientosHistorico();
                 List<ComportamientosHistorico> BehaviorHistoricTable = new ArrayList<ComportamientosHistorico>();
                 List<List<WebElement>> tablaWebElement = new ArrayList<List<WebElement>>();
-                tablaWebElement = (GetTable(tableBehaviorHistory));
-                for (List<WebElement> row : tablaWebElement) {
-                        BehaviorHistoric.descripcion = row.get(1).getText();
-                        BehaviorHistoric.usr = row.get(2).getText();
-                        BehaviorHistoric.activacion = row.get(3).getText();
-                        BehaviorHistoric.cancelacion = row.get(5).getText();
-                        BehaviorHistoricTable.add(BehaviorHistoric);
+                if(errorModuleBehaivor.isDisplayed()) {
+                        tablaWebElement = (GetTable(tableBehaviorHistory));
+                        for (List<WebElement> row : tablaWebElement) {
+                                BehaviorHistoric.descripcion = row.get(1).getText();
+                                BehaviorHistoric.usr = row.get(2).getText();
+                                BehaviorHistoric.activacion = row.get(3).getText();
+                                BehaviorHistoric.cancelacion = row.get(5).getText();
+                                BehaviorHistoricTable.add(BehaviorHistoric);
+                        }
+
                 }
                 return BehaviorHistoricTable;
         }
@@ -376,7 +387,7 @@ public class PaquetesPage extends BasePage {
         public Boolean VerifyStateSwitch(WebElement element) throws Exception {
                 return element.isSelected();
         }
-        public Boolean ChancheStatus(WebElement element)throws Exception {
+        public Boolean ChangeStatus(WebElement element)throws Exception {
                element.click();
                waitForEnable(element);
                return VerifyStateSwitch(element);
@@ -392,10 +403,8 @@ public class PaquetesPage extends BasePage {
                 }
                 return mensajes_texto;
         }
-
-        public Boolean ValidateMessages (List<String> list) throws Exception {
-
-        return false;
+        public Boolean ValidateMessages (String messaje) throws Exception {
+                return catch_messages().contains(messaje);
         }
 }
 
