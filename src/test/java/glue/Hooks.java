@@ -3,9 +3,6 @@ package glue;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-
-import db.HibernateUtil;
-import db.JDBC;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -26,7 +23,7 @@ public class Hooks {
     private DriverManager driverManager;
 
 
-    @Before("@browser, @Dummy")
+    @Before("@baufest")
     public void setUp()  {
         driverManager = DriverManagerFactory.getManager(System.getProperty("browser"));
         driver = driverManager.getDriver();
@@ -34,20 +31,7 @@ public class Hooks {
         driver.manage().window().maximize();
 
     }
-
-    @Before("@rest, @Dummy")
-    public void RestSetUp() throws IOException {
-        RestAssuredExtension restAssuredExtension = new RestAssuredExtension();
-
-    }
-
-    @Before("@Oracle, @Dummy")
-    public void HibernateSetUp() throws IOException {
-        HibernateUtil hibernateUtil = new HibernateUtil();
-        JDBC jdbc = new JDBC();
-    }
-
-    @After("@browser, @Dummy")
+    @After("@baufest")
     public void tearDown(Scenario scenario) {
         if(scenario.isFailed()){
             byte[] screenshot= ((TakesScreenshot)driverManager.getDriver()).getScreenshotAs(OutputType.BYTES);

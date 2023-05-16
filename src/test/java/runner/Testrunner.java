@@ -20,7 +20,7 @@ import java.util.logging.Logger;
         glue = {"glue"},
         plugin = {"json:test/report/cucumber_report.json"},
         snippets = SnippetType.CAMELCASE,
-        tags = {"@Dummy"}
+        tags = {"@baufest"}
 )
 
 public class Testrunner {

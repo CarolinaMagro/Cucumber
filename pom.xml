@@ -93,17 +93,7 @@
     </dependency>
 
 
-    <!-- https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator -->
-    <dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>json-schema-validator</artifactId>
-      <version>5.2.0</version>
-      <scope>test</scope>
-    </dependency>
-
-
-
-    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+      <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -111,23 +101,6 @@
       <scope>provided</scope>
     </dependency>
 
-
-
-    <dependency>
-      <groupId>org.hsqldb</groupId>
-      <artifactId>hsqldb</artifactId>
-      <version>2.5.1</version>
-    </dependency>
-
-
-
-    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>5.3.7.Final</version>
-      <type>pom</type>
-    </dependency>
     <dependency>
       <groupId>com.oracle.database.jdbc</groupId>
       <artifactId>ojdbc8</artifactId>

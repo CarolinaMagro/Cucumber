@@ -4,7 +4,7 @@ report.generate({
     jsonDir: './test/report/',
     reportPath: './test/report/',
     reportName: 'Automated Report',
-    pageFooter:'GlobalLogic Argentina S.A',
+    pageFooter:'Baufest',
     displayReportTime: true,
     plainDescription:true,
     openReportInBrowser: true,
@@ -14,7 +14,7 @@ report.generate({
     metadata:{
         browser: {
             name: 'chrome',
-            version: '60'
+            version: '113'
         },
         device: 'Local test machine',
         platform: {
@@ -27,10 +27,10 @@ report.generate({
     customData: {
         title: 'Run info',
         data: [
-            {label: 'Project', value: 'CLA022'},
+            {label: 'Project', value: 'Demoblaze'},
             {label: 'Release', value: 'MVP 1.0'},
             {label: 'Browser', value: 'chrome'},
-            {label: 'Environment', value: 'MVP 1.0'}
+            {label: 'Environment', value: 'Test'}
         ]
     }
 }

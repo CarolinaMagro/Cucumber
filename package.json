@@ -1,21 +1,21 @@
 {
   "name": "selenium-cucumber-java",
   "version": "1.0.0",
-  "description": "Automation Framework using Selenium WebDriver, Cucumber, RestAssured and Java",
+  "description": "Automation Framework using RestAssured and Java",
   "main": "index.js",
   "scripts": {
     "report": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "http://bitbucket.claro.amx/scm/cpsj/gestion-de-lineas-frontend-automation.git"
+    "url": "githubCompletar"
   },
-  "author": "Seba",
+  "author": "Caro",
   "license": "ISC",
   "bugs": {
     "url": "https://jira/issues"
   },
-  "homepage": "http://bitbucket.claro.amx/scm/cpsj/gestion-de-lineas-frontend-automation#readme",
+  "homepage": "GithubCompletar",
   "devDependencies": {
     "cucumber-html-reporter": "^5.5.0",
     "multiple-cucumber-html-reporter": "^1.16.1"

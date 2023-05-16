@@ -6,7 +6,7 @@ Feature: Login Page
   Scenario: Ingresar a pantalla login
     Given   El usuario se encuentra en la pantalla Login
     When    setea credenciales e ingresa a la app
-    Then    Se debe dirigir a la pantalla con titulo "PGLS"
+    Then    Se debe dirigir a la pantalla con titulo "STORE"
 
 
 
