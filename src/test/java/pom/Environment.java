@@ -9,23 +9,7 @@ import org.aeonbits.owner.Config;
 public interface Environment extends Config {
 
     String user_login();
-
     String pass_login();
-
     String urlPantallaPrincipal();
-    String urlCambioNim();
-
-    String urlCambioEstado();
-    String urlPaquetes();
-    String urlPaquetesServicesTab();
-    String urlPaquetesBehaviorTab();
-    String urlPaquetesTicklerTab();
-    String titlePage();
-
-
-
-    String db_url();
-    String db_user();
-    String db_pass();
 
 }

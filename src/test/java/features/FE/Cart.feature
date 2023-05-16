@@ -1,5 +1,5 @@
 @EndToEnd
-Feature: Log in Page
+Feature: Cart Page
   As a user I want to Log In
 
 
@@ -7,10 +7,13 @@ Feature: Log in Page
     Given The user is on the Demoblaze Page
 
   @baufest
-  Scenario: Log In a user
+  Scenario: Add a item into the cart
     Given The user opens Log in modal
     When The user write the Username
     And The user write the Password
     And Click into Log in
-    Then The user is loged
+    And The user is loged
+    And Select a item
+    And Add to cart item
+    Then The item is on the cart
 

@@ -1,5 +1,6 @@
 package pom.pages;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,49 +8,36 @@ import pom.BasePage;
 
 public class LoginPage extends BasePage {
 
-        @FindBy(id = "username")
-        private WebElement user;
+        @FindBy(id = "loginusername")
+        private WebElement UserName;
 
-        @FindBy(id = "password")
-        private WebElement pass;
+        @FindBy(id = "loginpassword")
+        private WebElement Password;
 
-        @FindBy(id = "kc-login")
-        private WebElement btnIngresar;
+        @FindBy(xpath ="//button[@type='button' and @onclick='logIn()']")
+        private WebElement LogInButton;
 
 
         public LoginPage(WebDriver driver){
                 super(driver);
         }
 
-
-        public void setUser(String text) throws Exception {
-                clearField(user);
-                setText(user, text);
+        public void clickLogin() throws Exception {
+                this.click(LogInButton);
+                Thread.sleep(5000);
         }
 
-        public void setPass(String text) throws Exception {
-                clearField(pass);
-                setText(pass, text);
+        public void setUser() throws Exception {
+
+                setText(UserName, environment().user_login());
         }
 
+        public void setPass() throws Exception {
 
-        public void login() throws Exception {
-                if (environment().user_login().isEmpty()) {
-                        setUser(System.getProperty("user_login"));
-                        setPass(System.getProperty("pass_login"));
-                }else {
-                        setUser(environment().user_login());
-                        setPass(environment().pass_login());
-                }
-
-                click(btnIngresar);
+                setText(Password, environment().pass_login());
         }
 
-        public boolean isInLogginPage() throws Exception {
-               return getTitle().equalsIgnoreCase("Iniciar sesión");
-        }
-
-        public void goToLoginPage(){
+               public void goToIndexPage(){
                 getDriver().get(environment().urlPantallaPrincipal());
         }
 

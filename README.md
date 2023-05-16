@@ -1,11 +1,8 @@
-# UI Framework automation testing
-UI Automation Framework using Selenium WebDriver, Cucumber and Java  
-
-## Selenium
-Selenium is an umbrella project encapsulating a variety of tools and libraries enabling web browser automation
-
-## Cucumber 
-Cucumber is a tool that supports Behaviour-Driven Development (BDD) - a software development process that aims to enhance software quality and reduce maintenance costs.
+##Technologies
+* Java
+* Maven
+* Cucumber
+* Selenium Webdriver
 
 ## Before Building
 * Ensure that you have Chrome installed and the chromedriver that matches your Chrome version available on your $PATH. You may have to update this from time to time.
@@ -13,5 +10,12 @@ Cucumber is a tool that supports Behaviour-Driven Development (BDD) - a software
 * Ensure that you Java SDK installed.
 
 ## usage
-- git clone *url*
-- npm i
+* Run src/test/java/runner/Testrunner.java
+* Reports opens automatecally when finish the execution
+
+## Architecture POM
+* Features: src/test/java/features/FE
+* Steps: src/test/java/glue/FrontEndSteps
+* Pages: src/test/java/pom/pages
+* Properties: src/test/resources/testing.properties
+* ChromeDriver: src/test/resources/chromedriver
